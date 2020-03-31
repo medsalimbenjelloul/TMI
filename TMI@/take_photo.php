@@ -28,7 +28,7 @@
 				
             </div>
             <div class="col-md-6">
-                <div id="results">Roto Detectado</div>
+                <div id="results">Rosto Detectado</div>
             </div>
             <div class="col-md-12 text-center">
                 <br/>
