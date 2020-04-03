@@ -4,6 +4,7 @@ if((isset($_POST['name']) && !empty($_POST['name']))
 && (isset($_POST['surname']) && !empty($_POST['surname']))
 && (isset($_POST['identi']) && !empty($_POST['identi']))){
 
+
 	$name = $_POST['name'];
 	$surname = $_POST['surname'];
 	$identi = $_POST['identi'];
