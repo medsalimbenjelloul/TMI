@@ -2,7 +2,6 @@
 require_once 'Company.php';
 require_once 'lib/database/DB.php';
 
-//Clase DB Producto que hereda de la clase DB que contiene conexión y ejecución de sentencias de la bd
 class CompanyDB extends DB{
     
     //Methods
@@ -40,7 +39,8 @@ class CompanyDB extends DB{
     
     //Método para insertar registros en la base de datos
     public function insertData($param){
-        $sql = "INSERT INTO producto(cod,nombre,descripcion,PVP,familia,stock) VALUES (?,?,?,?,?,?)";
+        $sql = "INSERT INTO company(name, detail, api_key, person_group_id, active, logo, last_update, last_user, was_deleted)
+                VALUES(:name, :detail, :api_key, :person_group_id, :active, :logo, current_timestamp(), :last_user, 0)";
         $filasAfectadas = $this->executeDML($sql, $param);
         
         return $filasAfectadas;
@@ -49,16 +49,21 @@ class CompanyDB extends DB{
     
     //Método de actualización de registros de la base de datos
     public function updateData($param){
-        $sql = "UPDATE producto SET stock=:stock WHERE cod=:cod";
+        $sql = "UPDATE company
+                SET name=:name, detail=:detail, api_key=:api_key, person_group_id=:person_group_id, active=:active, logo=:logo, last_update=current_timestamp(), last_user=:last_user, was_deleted=0
+                WHERE id_company=:id_company";
         $filasAfectadas = $this->executeDML($sql, $param);
         return $filasAfectadas;
     }
     
     //Método para eliminar un registro de la  base de datos
     public function deleteData($param){
-        $sql = "DELETE FROM producto WHERE cod=:cod";
+        $sql = "UPDATE company
+                SET last_update=current_timestamp(), last_user=:last_user, was_deleted=1
+                WHERE id_company=:id_company";
         $filasAfectadas = $this->executeDML($sql, $param);
         
         return $filasAfectadas;
     }
 }
+?>

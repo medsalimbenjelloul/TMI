@@ -3,7 +3,7 @@ class DB{
     /**
      * @return PDO
      */
-    private function accessDB(){
+    private function DB(){
         $server     = 'localhost';     
         $database   = 'tmi';        
         $user       = 'root';          
@@ -59,3 +59,5 @@ class DB{
         }        
     }    
 }
+
+?>

@@ -187,5 +187,6 @@ class Image{
         $this->was_deleted = $was_deleted;
     }
 
-    
 }
+
+?>
