@@ -16,4 +16,43 @@ main > .container {
   padding-left: 15px;
 }
 
+.form{
+ background: #f0f2f500;
+  margin: 100 90 1rem;
+  /*height: 10rem;
+  display: flex;
+  /* align-items por defecto tiene el valor `stretch` */
+  align-items: start;
+}
+.body{
+  
+}
+.cuerpo {
+                 padding:10px 0 10px 0;
+                  overflow-x:hidden;
+                 overflow-y:auto; /* Hace que se ajuste a la columna más alta en ff */
+                  height:100%; /* Hace que se ajuste a la columna más alta  en ie6 */
+               }
+   
+               .columna_derecha {
+                    float:right; /* Alineación a la derecha */
+                  width:270px;
+                    border:solid lightblue 1px;
+                    padding:10px;
+              }
+    
+               .columna_izquierda {
+                   float:left; /* Alineación a la izquierda */
+                  width:170px;
+                   border:solid lightblue 1px;
+                  padding:10px;
+               }
+  
+                .columna_central {
+                 margin-left:200px; /* Espacio para la columna izquierda */
+               margin-right:300px; /* Espacio para la columna derecha */
+                 border:solid navy 1px;
+                 padding:10px;
+             }
+
 
