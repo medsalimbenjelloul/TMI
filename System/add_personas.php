@@ -16,47 +16,38 @@ include 'view/root_header.php'
 	<body>
 	<br>
 			<div class="form">
-			<center><h1>Agregar Eventos</h1></center><br><br>
+			<center><h1>Agregar Personas</h1></center><br><br>
 				<div class="container">
 					<div class="row">
 		               <div class="col-sm">
 						  <form>
 							  <div class="form-group row">
-							    <label for="staticEmail" class="col-sm-2 col-form-label">Nombre Evento</label>
+							    <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
 							    <div class="col-sm-10">
 							     <input class="form-control form-control-lg" type="text" placeholder="">
 							    </div>
 							  </div>
-							  <div class="form-group row">
-							    <label for="staticEmail" class="col-sm-2 col-form-label">Fecha</label>
-							    <div class="col-sm-10">
-							    <input type="date" name="fechaesperada">
+							  <div class="drag-drop">
+							    	Seleccione Foto 1 <br>
+							            <input type="file" multiple="multiple" id="photo"/>
+							            <span class="desc"></span>
 							    </div>
-							  </div>
-
-                               <div class="form-group row">
-                               	<label for="staticEmail" class="col-sm-2 col-form-label">Hora</label>
-							    <input type="time" name="hora" value="11:45:00" max="22:30:00" min="10:00:00" step="1">
-							   
-							  </div>
-
-
-
-					           <div class="form-group">
-							    	<label for="exampleFormControlTextarea1">Descripción</label>
-							    	<textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
-						       </div>
+							     <div class="drag-drop">
+							    	Seleccione Foto 2 <br>
+							            <input type="file" multiple="multiple" id="photo"/>
+							            <span class="desc"></span>
+							    </div>
+							     <div class="drag-drop">
+							    	Seleccione Foto 3 <br>
+							            <input type="file" multiple="multiple" id="photo"/>
+							            <span class="desc"></span>
+							    </div>
 
 				          </form>
 			           </div>
 			             <div class="col-sm">
 			             	  
-							    <div class="drag-drop">
-							    	Seleccione Foto Evento <img border="0" alt="" src="view/logos/icon.png" width="" height=""><br>
-							            <input type="file" multiple="multiple" id="photo"/>
-							            <span class="desc"></span>
-							        </div>
-									<br>
+									<br><br><br>
 									 <button type="button" class="btn btn-primary">Guardar</button>
 									 <button type="button" class="btn btn-secondary">Cancelar</button>
 			           	 </div>

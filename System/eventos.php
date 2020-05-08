@@ -1,4 +1,3 @@
-
 <html lang="es">
 <head>
   <?php
@@ -24,7 +23,7 @@ include 'view/root_header.php'
 					  <div class="row">
 						<div class="col-sm">
 							  <center>
-							  <a href="">
+							  <a href="add_events.php">
 								 <img border="0" alt="" src="view/logos/icon.png" width="" height="">
 								  </a> 
 								   <br>
@@ -33,10 +32,10 @@ include 'view/root_header.php'
 							  <br><br>
 					    <div class="col-sm">
 							  <center>
-							    <a href="">
-							       <img border="0" alt="" src="view/logos/icon.png" width="" height="">
+							    <a href="add_empresa.php">
+							       <img border="0" alt="" src="view/logos/empresa.png" width="" height="">
 								    </a> <br>
-							       <h5>Agregar Evento</h5>
+							       <h5>Crear Empresa</h5>
 							  </center>
 						  
 						   </div>
@@ -59,7 +58,7 @@ include 'view/root_header.php'
 						     </div>
 						</div>
 						<div class="col-sm">
-							  <a href="">
+							  <a href="add_personas.php">
 								 <center>
 								    <img border="0" alt="" src="view/logos/persona.png" width="" height="">
 								   </a> <br>
@@ -77,9 +76,7 @@ include 'view/root_header.php'
 					  </div>
 					</div>
                </div>
-
-
-			
+		
 			</form>
 			</div>
     </body>
