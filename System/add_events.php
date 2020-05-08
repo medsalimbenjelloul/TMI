@@ -67,8 +67,9 @@ include 'view/root_header.php'
 							      </select>
 							    </div>
 							    <div class="drag-drop">
-							            <input type="file" multiple="multiple" id="photo" />
-							            <span class="desc">Pulse aquí para añadir Logo</span>
+							    	Seleccione Un Logo <img border="0" alt="" src="view/logos/icon.png" width="" height=""><br>
+							            <input type="file" multiple="multiple" id="photo"/>
+							            <span class="desc"></span>
 							        </div>
 
 
