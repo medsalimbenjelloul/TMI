@@ -39,9 +39,13 @@
 				<table id="user_data" class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th width="10%">Image</th>
-							<th width="35%">First Name</th>
-							<th width="35%">Last Name</th>
+							<th width="10%">Foto1</th>
+							<th width="10%">Foto2</th>
+							<th width="10%">Foto3</th>
+							<th width="10%">Nombre</th>
+							<th width="10%">Email</th>
+							<th width="10%">Evento</th>
+							<th width="10%">Fecha N.</th>
 							<th width="10%">Edit</th>
 							<th width="10%">Delete</th>
 						</tr>
