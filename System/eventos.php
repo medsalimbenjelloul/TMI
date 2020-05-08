@@ -7,6 +7,8 @@ include 'view/root_header.php'
 ?>     
        
         <meta charset="utf-8">
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="view/css/bootstrap.min.css">
         <link rel="stylesheet" href="view/css/style.css">
@@ -18,30 +20,59 @@ include 'view/root_header.php'
 			<div class="form">
 			<center><h1>Bienvenido Administrador</h1></center><br><br>
 				<div class="container">
+				
 					  <div class="row">
 						<div class="col-sm">
-						<center>
-						<a href="">
-                         <img border="0" alt="" src="view/logos/icon.png" width="" height="">
-                             </a> <br>
-						  <h5>Agregar Evento</h5>
-						  </center>
+							  <center>
+							  <a href="">
+								 <img border="0" alt="" src="view/logos/icon.png" width="" height="">
+								  </a> 
+								   <br>
+								  <h5>Agregar Evento</h5>
+								</center>
+							  <br><br>
+					    <div class="col-sm">
+							  <center>
+							    <a href="">
+							       <img border="0" alt="" src="view/logos/icon.png" width="" height="">
+								    </a> <br>
+							       <h5>Agregar Evento</h5>
+							  </center>
+						  
+						   </div>
 						</div>
 						<div class="col-sm">
-						<a href="">
-							<center>
-                              <img border="0" alt="" src="view/logos/registro.png" width="" height="">
-                             </a> <br>
-						    <h5>Inscripciones</h5>
-						  </center>
+							  <a href="">
+								 <center>
+								   <img border="0" alt="" src="view/logos/registro.png" width="" height=""> 
+								   </a>
+									 <br>
+								   <h5>Inscripciones</h5>
+							   </center><br><br>
+							  <div class="col-sm">
+							     <a href="">
+								  <center>
+								     <img border="0" alt="" src="view/logos/reporte.png" width="" height="">
+								    </a> <br>
+								   <h5>Reporte</h5>
+							      </center>
+						     </div>
 						</div>
 						<div class="col-sm">
-						<a href="">
-							<center>
-                              <img border="0" alt="" src="view/logos/persona.png" width="" height="">
-                             </a> <br>
-						    <h5>Personas</h5>
-						  </center>
+							  <a href="">
+								 <center>
+								    <img border="0" alt="" src="view/logos/persona.png" width="" height="">
+								   </a> <br>
+								  <h5>Personas</h5>
+							    </center><br><br>
+						    <div class="col-sm">
+							   <a href="">
+								  <center>
+								    <img border="0" alt="" src="view/logos/admin.png" width="" height="">
+								   </a> <br>
+								 <h5>Administracion</h5>
+							  </center>
+							</div>
 						</div>
 					  </div>
 					</div>

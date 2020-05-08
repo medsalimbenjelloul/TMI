@@ -14,7 +14,7 @@
         <header>
             <!-- Menu -->
             <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="#">EVENTOS</a>
+                <img border="0" alt="" src="view/logos/logoTMI.png" width="150" height="68"><a class="navbar-brand" href="#"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
