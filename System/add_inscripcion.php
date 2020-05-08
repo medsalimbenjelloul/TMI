@@ -16,7 +16,7 @@ include 'view/root_header.php'
 	<body>
 	<br>
 			<div class="form">
-			<center><h1>Agregar Personas</h1></center><br><br>
+			<center><h1>Inscripción</h1></center><br><br>
 				<div class="container">
 					<div class="row">
 		               <div class="col-sm">
@@ -27,7 +27,16 @@ include 'view/root_header.php'
 							     <input class="form-control form-control-lg" type="text" placeholder="">
 							    </div>
 							  </div>
+							   <div class="form-group row">
+							    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+							    <div class="col-sm-10">
+							     <input class="form-control form-control-lg" type="text" placeholder="">
+							    </div>
+							  </div>
+							    
+							    Necesitamos 3 fotos con diferentes angulos de su rostro: 
 							  <div class="drag-drop">
+
 							    	Seleccione Foto 1 <br>
 							            <input type="file" multiple="multiple" id="photo"/>
 							            <span class="desc"></span>
@@ -46,7 +55,20 @@ include 'view/root_header.php'
 				          </form>
 			           </div>
 			             <div class="col-sm">
-			             	  
+			             	<div class="form-group">
+							    
+							      <select id="disabledSelect" class="form-control">
+							        <option>Seleccionar Evento</option>
+							         <option>TI</option>
+							          <option>Recreación</option>
+							      </select>
+							    </div>
+			             	   <div class="form-group row">
+									    <label for="staticEmail" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
+									    <div class="col-sm-10">
+									    <input type="date" name="fechaesperada">
+									    </div>
+							  </div>
 									<br><br><br>
 									 <button type="button" class="btn btn-primary">Guardar</button>
 									 <button type="button" class="btn btn-secondary">Cancelar</button>

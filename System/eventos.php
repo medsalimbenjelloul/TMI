@@ -41,7 +41,7 @@ include 'view/root_header.php'
 						   </div>
 						</div>
 						<div class="col-sm">
-							  <a href="">
+							  <a href="add_inscripcion.php">
 								 <center>
 								   <img border="0" alt="" src="view/logos/registro.png" width="" height=""> 
 								   </a>
@@ -58,7 +58,7 @@ include 'view/root_header.php'
 						     </div>
 						</div>
 						<div class="col-sm">
-							  <a href="add_personas.php">
+							  <a href="">
 								 <center>
 								    <img border="0" alt="" src="view/logos/persona.png" width="" height="">
 								   </a> <br>
@@ -69,7 +69,7 @@ include 'view/root_header.php'
 								  <center>
 								    <img border="0" alt="" src="view/logos/admin.png" width="" height="">
 								   </a> <br>
-								 <h5>Administracion</h5>
+								 <h5>Administración</h5>
 							  </center>
 							</div>
 						</div>
