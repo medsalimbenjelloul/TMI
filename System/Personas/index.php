@@ -1,8 +1,4 @@
 
-  <?php
-include 'view/root_header.php'
-
-?>  
 <html>
 	<head>
 		
@@ -196,7 +192,3 @@ $(document).ready(function(){
 	
 });
 </script>
-<?php
-include 'view/root_footer.php'
-
-?>
