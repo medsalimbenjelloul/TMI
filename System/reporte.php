@@ -17,7 +17,7 @@ include 'view/root_header.php'
 	<body>
 	<br>
 			<div class="form">
-			<center><h1>Bienvenido Administrador</h1></center><br><br>
+			<center><h1>Reportes</h1></center><br><br>
 				<div class="container">
 				
 					  <div class="row">

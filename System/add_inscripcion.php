@@ -27,6 +27,14 @@ include 'view/root_header.php'
 							     <input class="form-control form-control-lg" type="text" placeholder="">
 							    </div>
 							  </div>
+							  <div class="form-row">
+								    <div class="col">
+								      <input type="text" class="form-control" placeholder="Primer Apellido">
+								    </div>
+								    <div class="col">
+								      <input type="text" class="form-control" placeholder="Segundo Apellido">
+								    </div>
+								  </div><br>
 							   <div class="form-group row">
 							    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
 							    <div class="col-sm-10">
@@ -68,6 +76,12 @@ include 'view/root_header.php'
 									    <div class="col-sm-10">
 									    <input type="date" name="fechaesperada">
 									    </div>
+							  </div>
+							  <div class="form-group row">
+							    <label for="staticEmail" class="col-sm-2 col-form-label">Teléfono</label>
+							    <div class="col-sm-10">
+							     <input class="form-control form-control-lg" type="text" placeholder="">
+							    </div>
 							  </div>
 									<br><br><br>
 									 <button type="button" class="btn btn-primary">Guardar</button>
