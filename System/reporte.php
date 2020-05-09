@@ -17,7 +17,7 @@ include 'view/root_header.php'
 	<body>
 	<br>
 			<div class="form">
-			<center><h1>Bienvenido Administrador</h1></center><br><br>
+			<center><h1>Reportes</h1></center><br><br>
 				<div class="container">
 				
 					  <div class="row">
@@ -49,7 +49,7 @@ include 'view/root_header.php'
 								   <h5>Inscripciones</h5>
 							   </center><br><br>
 							  <div class="col-sm">
-							     <a href="reporte.php">
+							     <a href="">
 								  <center>
 								     <img border="0" alt="" src="view/logos/reporte.png" width="" height="">
 								    </a> <br>

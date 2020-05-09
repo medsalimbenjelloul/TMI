@@ -1,4 +1,9 @@
 
+
+ <?php
+include '../view/root_header.php'
+
+?> 
 <html>
 	<head>
 		
@@ -32,8 +37,8 @@
 			<br />
 			<div class="table-responsive">
 				<br />
-				<div align="right">
-					<button type="button" id="add_button" data-toggle="modal" data-target="#userModal" class="btn btn-info btn-lg">Add</button>
+				<div align="center">
+					<button type="button" id="add_button" data-toggle="modal" data-target="#userModal" class="btn btn-info btn-lg">Agregar nuevo</button>
 				</div>
 				<br /><br />
 				<table id="user_data" class="table table-bordered table-striped">
@@ -55,6 +60,10 @@
 			</div>
 		</div>
 	</body>
+	<?php
+include '../view/root_footer.php'
+
+?>
 </html>
 
 <div id="userModal" class="modal fade">
@@ -63,15 +72,18 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Add User</h4>
+					<h4 class="modal-title">Agregar Nuevo Asistente</h4>
 				</div>
 				<div class="modal-body">
-					<label>Enter First Name</label>
+					<label>Nombre</label>
 					<input type="text" name="first_name" id="first_name" class="form-control" />
 					<br />
-					<label>Enter Last Name</label>
+					<label>1ª Apellido</label>
 					<input type="text" name="last_name" id="last_name" class="form-control" />
 					<br />
+					<label>2ª Apellido</label>
+					<input type="text" name="last_name" id="last_name" class="form-control" />
+						<br />
 					<label>Select User Image</label>
 					<input type="file" name="user_image" id="user_image" />
 					<span id="user_uploaded_image"></span>
@@ -196,3 +208,4 @@ $(document).ready(function(){
 	
 });
 </script>
+
