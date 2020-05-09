@@ -49,7 +49,7 @@ include 'view/root_header.php'
 								   <h5>Inscripciones</h5>
 							   </center><br><br>
 							  <div class="col-sm">
-							     <a href="">
+							     <a href="reporte.php">
 								  <center>
 								     <img border="0" alt="" src="view/logos/reporte.png" width="" height="">
 								    </a> <br>
