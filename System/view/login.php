@@ -21,15 +21,15 @@
     <div class="container">                    
    
           <form class="form-signin">
-  <img class="mb-4" src="../view/logos/logoTMI.png" alt="" width="72" height="72">
+  <img class="mb-4" src="../view/logos/logoTMI.png" alt="" width="150" height="72">
   
   <h1 class="h3 mb-3 font-weight-normal">Inicio Sesión</h1>
   <label for="inputEmail" class="sr-only">User</label>
-  <input type="user" id="inputEmail" class="form-control" placeholder="User" required autofocus>
+  <input type="user" id="inputEmail" class="form-control" placeholder="User" required autofocus><br>
   <label for="inputPassword" class="sr-only">Password</label>
   <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
   <div class="checkbox mb-3">
-    <label>
+    <label><br>
       <input type="checkbox" value="remember-me"> Recordar Sesión
     </label>
   </div>
