@@ -20,7 +20,7 @@
   <body class="text-center">
     <div class="container">                    
    
-          <form class="form-signin">
+  <form class="form-signin">
   <img class="mb-4" src="../view/logos/logoTMI.png" alt="" width="150" height="72">
   
   <h1 class="h3 mb-3 font-weight-normal">Inicio Sesión</h1>
@@ -34,7 +34,7 @@
     </label>
   </div>
   <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
-  <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+  <p class="mt-5 mb-3 text-muted">&copy; TMI 2020</p>
 </form>
     </div> 
 </html>

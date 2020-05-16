@@ -1,9 +1,3 @@
-
-
- <?php
-include '../view/root_header.php'
-
-?> 
 <html>
 	<head>
 		
@@ -60,11 +54,6 @@ include '../view/root_header.php'
 			</div>
 		</div>
 	</body>
-	<?php
-include '../view/root_footer.php'
-
-?>
-</html>
 
 <div id="userModal" class="modal fade">
 	<div class="modal-dialog">
@@ -181,7 +170,7 @@ $(document).ready(function(){
 				$('#action').val("Edit");
 				$('#operation').val("Edit");
 			}
-		})
+		});
 	});
 	
 	$(document).on('click', '.delete', function(){
