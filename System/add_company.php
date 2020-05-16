@@ -15,7 +15,7 @@ include 'view/root_header.php'
 	
 	<body>
 	<br>
-			<div class="form">
+			<div class="form" action="../model/CompanyDB.php">
 			<center><h1>Crear Empresa</h1></center><br><br>
 				<div class="container">
 					<div class="row">
@@ -24,7 +24,7 @@ include 'view/root_header.php'
 							  <div class="form-group row">
 							    <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
 							    <div class="col-sm-10">
-							     <input class="form-control form-control-lg" type="text" placeholder="">
+							     <input class="form-control form-control-lg" type="text" name ="name" placeholder="">
 							    </div>
 							  </div>
 							  <div class="form-group">
@@ -52,7 +52,7 @@ include 'view/root_header.php'
 
 					           <div class="form-group">
 							    	<label for="exampleFormControlTextarea1">Descripción</label>
-							    	<textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+							    	<textarea class="form-control" name ="detail" id="exampleFormControlTextarea1" rows="2"></textarea>
 						       </div>
 
 				          </form>
@@ -68,12 +68,12 @@ include 'view/root_header.php'
 							    </div>
 							    <div class="drag-drop">
 							    	Seleccione Un Logo <img border="0" alt="" src="view/logos/icon.png" width="" height=""><br>
-							            <input type="file" multiple="multiple" id="photo"/>
+							            <input type="file" name="logo" multiple="multiple" id="photo"/>
 							            <span class="desc"></span>
 							        </div>
 									<br>
-									 <button type="button" class="btn btn-primary">Guardar</button>
-									 <button type="button" class="btn btn-secondary">Cancelar</button>
+									 <button type="button" class="btn btn-primary" type= "submit">Guardar</button>
+									 <button type="button" class="btn btn-secondary" type= "submit">Cancelar</button>
 			           	 </div>
 			           	
 				      </div>
