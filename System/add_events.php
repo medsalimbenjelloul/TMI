@@ -17,7 +17,7 @@ include 'view/root_header.php'
 	<br>
 			<div class="form" action="Company.php">
 			<center><h1>Agregar Eventos</h1></center><br><br>
-				<div class="container">
+				<div class="container labels">
 					<div class="row">
 		               <div class="col-sm">
 						  <form>
@@ -38,23 +38,23 @@ include 'view/root_header.php'
 							    <div class="col-sm-10">
 							    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
 							    </div>
-							  </div>
-					          <center>
+							  </div><center>							  
+                                                              
+                                                              						  
+						  </form>
+
 <br>
 									 <button type="button" class="btn btn-primary">Guardar</button>
 									 <button type="button" class="btn btn-secondary">Cancelar</button> <center>
-				          </form>
 			           </div>
 			            
-			           	
+			           	</div><center>
+
 				      </div>
 
 
 					</div>
-               </div>
-		
-			</form>
-			</div>
+              
     </body>
 
 <?php
