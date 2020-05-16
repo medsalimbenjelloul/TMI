@@ -302,7 +302,7 @@ main > .container {
 
 .labels {
   width: 500px;
-
+  height:100%; 
 }
 .footer {
   background-color: #f5f5f5;
