@@ -82,7 +82,6 @@ include 'view/root_header.php'
     </body>
 
 
-
 <?php
 include 'view/root_footer.php'
 

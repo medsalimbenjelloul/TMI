@@ -1,6 +1,6 @@
 <?php
 require_once 'Company.php';
-require_once '../lib/database/DB.php';
+require_once 'lib/database/DB.php';
 
 class CompanyDB extends DB{
     

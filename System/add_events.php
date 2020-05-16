@@ -15,9 +15,9 @@ include 'view/root_header.php'
 	
 	<body>
 	<br>
-			<div class="form">
+			<div class="form" action="Company.php">
 			<center><h1>Agregar Eventos</h1></center><br><br>
-				<div class="container">
+				<div class="container2">
 					<div class="row">
 		               <div class="col-sm">
 						  <form>
@@ -33,33 +33,19 @@ include 'view/root_header.php'
 							    <input type="date" name="fechaesperada">
 							    </div>
 							  </div>
-
-                               <div class="form-group row">
-                               	<label for="staticEmail" class="col-sm-2 col-form-label">Hora</label>
-							    <input type="time" name="hora" value="11:45:00" max="22:30:00" min="10:00:00" step="1">
-							   
+							  <div class="form-group row">
+							    <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
+							    <div class="col-sm-10">
+							    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+							    </div>
 							  </div>
-
-
-
-					           <div class="form-group">
-							    	<label for="exampleFormControlTextarea1">Descripción</label>
-							    	<textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
-						       </div>
-
+					          <center>
+<br>
+									 <button type="button" class="btn btn-primary">Guardar</button>
+									 <button type="button" class="btn btn-secondary">Cancelar</button> </center>
 				          </form>
 			           </div>
-			             <div class="col-sm">
-			             	  
-							    <div class="drag-drop">
-							    	Seleccione Foto Evento <img border="0" alt="" src="view/logos/icon.png" width="" height=""><br>
-							            <input type="file" multiple="multiple" id="photo"/>
-							            <span class="desc"></span>
-							        </div>
-									<br>
-									 <button type="button" class="btn btn-primary">Guardar</button>
-									 <button type="button" class="btn btn-secondary">Cancelar</button>
-			           	 </div>
+			            
 			           	
 				      </div>
 
@@ -70,8 +56,6 @@ include 'view/root_header.php'
 			</form>
 			</div>
     </body>
-
-
 
 <?php
 include 'view/root_footer.php'
