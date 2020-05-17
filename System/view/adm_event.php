@@ -30,39 +30,6 @@ require_once "security.php";
         - Asignar Asistentes (Obligatorio)
         - Asignar controladores 
         </pre>
-        
-        <div class="form">
-			<center><h1>Agregar Eventos</h1></center><br><br>
-			 <div class="container labels">
-			    <div class="row">
-		               <div class="col-sm">
-						  <form>
-							  <div class="form-group row">
-							    <label for="staticEmail" class="col-sm-2 col-form-label">Nombre Evento</label>
-							    <div class="col-sm-10">
-							     <input class="form-control form-control-lg" type="text" placeholder="">
-							    </div>
-							  </div>
-							
-							  <div class="form-group row">
-							    <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
-							    <div class="col-sm-10">
-							    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
-							    </div>
-							  </div>							  
-                                                                <button type="button" class="btn btn-primary">Guardar</button>
-							        <button type="button" class="btn btn-secondary">Cancelar</button>
-                                                             
-			          		   </form>
-
-                               </div>        
-			    </div>
-                         </div>
-        </div>
-        
-        
-        
-        
         <!-- Begin page footer -->
         <?php require_once 'adm_footer.php';?>
     </body>
