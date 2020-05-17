@@ -9,17 +9,21 @@ class User{
     protected $last_update;
     protected $last_user;
     protected $was_deleted;
+    protected $id_role;
+    protected $role_name;
     
     // Construct
     public function __construct($row) {
-        $this->id_user = $row["id_user"];
-        $this->username = $row["username"];
-        $this->password = $row["password"];
-        $this->active = $row["active"];
-        $this->id_company = $row["id_company"];
-        $this->last_update = $row["last_update"];
-        $this->last_user = $row["last_user"];
-        $this->was_deleted = $row["was_deleted"];
+        $this->id_user = isset($row["id_user"]) ?  $row["id_user"] : "";
+        $this->username = isset($row["username"]) ? $row["username"] : "";
+        $this->password = isset($row["password"]) ? $row["password"] : "";
+        $this->active = isset($row["active"]) ? $row["active"] : "";
+        $this->id_company = isset($row["id_company"]) ? $row["id_company"] : "";
+        $this->last_update = isset($row["last_update"]) ? $row["last_update"] : "";
+        $this->last_user = isset($row["last_user"]) ? $row["last_user"] : "";
+        $this->was_deleted = isset($row["was_deleted"]) ? $row["was_deleted"] : "";
+        $this->id_role = isset($row["id_role"]) ? $row["id_role"] : "";
+        $this->role_name = isset($row["role_name"]) ? $row["role_name"] : "";
     }   
     
     //Methods
@@ -55,6 +59,14 @@ class User{
         return $this->was_deleted;
     }
 
+    function getId_role() {
+        return $this->id_role;
+    }
+
+    function getRole_name() {
+        return $this->role_name;
+    }
+
     function setId_user($id_user) {
         $this->id_user = $id_user;
     }
@@ -85,6 +97,14 @@ class User{
 
     function setWas_deleted($was_deleted) {
         $this->was_deleted = $was_deleted;
+    }
+
+    function setId_role($id_role) {
+        $this->id_role = $id_role;
+    }
+
+    function setRole_name($role_name) {
+        $this->role_name = $role_name;
     }
 
 }

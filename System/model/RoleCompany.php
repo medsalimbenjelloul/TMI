@@ -10,49 +10,25 @@ class RoleCompany{
     
     // Construct
     public function __construct($row) {        
-        $this->id_company = $row["id_company"];
-        $this->id_user = $row["id_user"];
-        $this->id_role = $row["id_role"];
-        $this->last_update = $row["last_update"];
-        $this->last_user = $row["last_user"];
-        $this->was_deleted = $row["was_deleted"];
+        $this->id_company = isset($row["id_company"]) ?  $row["id_company"] : "";
+        $this->id_user = isset($row["id_user"]) ?  $row["id_user"] : "";
+        $this->id_role = isset($row["id_role"]) ?  $row["id_role"] : "";
+        $this->last_update = isset($row["last_update"]) ?  $row["last_update"] : "";
+        $this->last_user = isset($row["last_user"]) ?  $row["last_user"] : "";
+        $this->was_deleted = isset($row["was_deleted"]) ?  $row["was_deleted"] : "";
     }   
     
     //Methods
-    function getId_person() {
-        return $this->id_person;
+    function getId_company() {
+        return $this->id_company;
     }
 
     function getId_user() {
         return $this->id_user;
     }
 
-    function getNames() {
-        return $this->names;
-    }
-
-    function getFirst_surname() {
-        return $this->first_surname;
-    }
-
-    function getSecond_surname() {
-        return $this->second_surname;
-    }
-
-    function getBirthday() {
-        return $this->birthday;
-    }
-
-    function getEmail() {
-        return $this->email;
-    }
-
-    function getPhone() {
-        return $this->phone;
-    }
-
-    function getId_company() {
-        return $this->id_company;
+    function getId_role() {
+        return $this->id_role;
     }
 
     function getLast_update() {
@@ -67,40 +43,16 @@ class RoleCompany{
         return $this->was_deleted;
     }
 
-    function setId_person($id_person) {
-        $this->id_person = $id_person;
+    function setId_company($id_company) {
+        $this->id_company = $id_company;
     }
 
     function setId_user($id_user) {
         $this->id_user = $id_user;
     }
 
-    function setNames($names) {
-        $this->names = $names;
-    }
-
-    function setFirst_surname($first_surname) {
-        $this->first_surname = $first_surname;
-    }
-
-    function setSecond_surname($second_surname) {
-        $this->second_surname = $second_surname;
-    }
-
-    function setBirthday($birthday) {
-        $this->birthday = $birthday;
-    }
-
-    function setEmail($email) {
-        $this->email = $email;
-    }
-
-    function setPhone($phone) {
-        $this->phone = $phone;
-    }
-
-    function setId_company($id_company) {
-        $this->id_company = $id_company;
+    function setId_role($id_role) {
+        $this->id_role = $id_role;
     }
 
     function setLast_update($last_update) {

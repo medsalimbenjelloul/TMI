@@ -3,7 +3,7 @@ class DB{
     /**
      * @return PDO
      */
-    private function DB(){
+    private function accessDB(){
         $server     = 'localhost';     
         $database   = 'tmi';        
         $user       = 'root';          
@@ -48,7 +48,7 @@ class DB{
             $stm->execute($param);
             $rowsAffectedOrLastID = 0;
             if($withLastID != 0 &&  (strpos(strtoupper($dml), 'INSERT')!==false)){
-                $rowsAffectedOrLastID = $pdo->lastInsertId();
+                $rowsAffectedOrLastID = $connection->lastInsertId();
             } else{
                 $rowsAffectedOrLastID = $stm->rowCount();
             }

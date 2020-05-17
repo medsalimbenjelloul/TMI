@@ -11,13 +11,13 @@ class Role{
     
     // Construct
     public function __construct($row) {
-        $this->id_role = $row["id_role"];
-        $this->name = $row["name"];
-        $this->detail = $row["detail"];
-        $this->is_only_system = $row["is_only_system"];
-        $this->last_update = $row["last_update"];
-        $this->last_user = $row["last_user"];
-        $this->was_deleted = $row["was_deleted"];
+        $this->id_role = isset($row["id_role"]) ?  $row["id_role"] : "";
+        $this->name = isset($row["name"]) ? $row["name"] : "";
+        $this->detail = isset($row["detail"]) ? $row["detail"] : "";
+        $this->is_only_system = isset($row["is_only_system"]) ? $row["is_only_system"] : "";
+        $this->last_update = isset($row["last_update"]) ? $row["last_update"] : "";
+        $this->last_user = isset($row["last_user"]) ? $row["last_user"] : "";
+        $this->was_deleted = isset($row["was_deleted"]) ? $row["was_deleted"] : "";
     }   
     
     //Methods
