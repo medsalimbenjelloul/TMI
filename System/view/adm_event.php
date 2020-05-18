@@ -1,6 +1,6 @@
 <?php
 require_once "security.php";
-require_once MODEL . "UserDB.php";
+require_once MODEL . "EventDB.php";
 require_once MODEL . "RoleCompanyDB.php";
 require_once MODEL . "RoleDB.php";
 
@@ -18,7 +18,8 @@ if ($_GET != array()) {
         Utils::redirect("adm_users_list.php?message=".$message);
     }
 } else if ($_POST != array()) {
-    if ($_POST["action"] == "new") { // NEW
+    if ($_POST["action"] == "new") { 
+        // NEW
         $message = "Los datos de <strong>".$_POST["username"]."</strong> se han ingresado correctamente. ";
         // Add final user
         $id_user = (new UserDB())->insertData(array( "username"=>$_POST["username"], "password"=>md5($_POST["password"]), "active"=>$_POST["active"], "id_company"=>$actual_user->getId_company(),"last_user" => $actual_user->getId_user() ));
@@ -34,7 +35,6 @@ if ($_GET != array()) {
     }
     Utils::redirect("adm_users_list.php?message=".$message);
 }
-
 
 
 ?>
@@ -70,7 +70,7 @@ if ($_GET != array()) {
        
         </pre>
         
-        <div class="form" action="adm_user.php" method="post" >
+        <div class="form" action="adm_event.php" method="post" >
 			<center><h1>Agregar Eventos</h1></center><br><br>
 			 <div class="container labels">
 			    <div class="row">
@@ -86,13 +86,13 @@ if ($_GET != array()) {
 							  <div class="form-group row">
 							    <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
 							    <div class="col-sm-10">
-							    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="" ></textarea>
+							    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="detail" ></textarea>
 							    </div>
 							  </div>						
 
                              
                               <div class="form-group row">
-                                <label for="id_role" class="col-sm-2 col-form-label">Asisgnar Expositor</label>
+                                <label for="id_role" class="col-sm-2 col-form-label">Asignar Expositor</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" id="iid_role" name="id_role" <?php echo ($action=="view") ? "disabled" : ""; ?> required>
                                         <option <?php if($action=="new"){ echo "selected";} ?> disabled value="">Seleccione un un Expositor</option>
@@ -110,7 +110,7 @@ if ($_GET != array()) {
 
                              
                              <div class="form-group row">
-                                <label for="id_role" class="col-sm-2 col-form-label">Asisgnar Asistente</label>
+                                <label for="id_role" class="col-sm-2 col-form-label">Asignar Asistente</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" id="iid_role" name="id_role" <?php echo ($action=="view") ? "disabled" : ""; ?> required>
                                         <option <?php if($action=="new"){ echo "selected";} ?> disabled value="">Seleccione un un Asistente</option>
@@ -128,7 +128,7 @@ if ($_GET != array()) {
 
                                 <center>
                                   <div class="form-group row">                              
-                                <div class="col text-center">
+                                <div class="col text-right">
                                     <?php if($action=="new" || $action=="edit"){ ?>
                                     <button type="submit" class="btn btn-success mr-2"><i class="far fa-check-square m-1"></i> Aceptar</button>
                                     <a href="adm_users_list.php" class="btn btn-warning"><i class="far fa-window-close"></i> Cancelar</a>
