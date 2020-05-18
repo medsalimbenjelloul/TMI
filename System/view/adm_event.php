@@ -1,6 +1,6 @@
 <?php
 require_once "security.php";
-require_once MODEL . "EventDB.php";
+require_once MODEL . "UserDB.php";
 require_once MODEL . "RoleCompanyDB.php";
 require_once MODEL . "RoleDB.php";
 
@@ -70,7 +70,7 @@ if ($_GET != array()) {
        
         </pre>
         
-        <div class="form" action="adm_event.php" method="post" >
+        <div class="form" action="adm_user.php" method="post" >
 			<center><h1>Agregar Eventos</h1></center><br><br>
 			 <div class="container labels">
 			    <div class="row">
