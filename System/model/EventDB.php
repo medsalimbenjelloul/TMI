@@ -3,16 +3,7 @@ require_once 'Event.php';
 require_once 'lib/database/DB.php';
 
 class EventDB extends DB{
-    
-    //Methods protected $id_event; 
-    /**
-    protected $name;
-    protected $detail;
-    protected $id_company;
-    protected $last_update; 
-    protected $last_user; 
-    protected $was_deleted;
-    //************ **/
+
     public function getData( $like="" ){
         $data=array();
         try{
@@ -73,9 +64,5 @@ class EventDB extends DB{
         
         return $filasAfectadas;
     }
-    
-    //Método para actualizar PersonGroup en la  base de datos
-   
-    
 }
 ?>
