@@ -18,7 +18,11 @@ if ($_GET != array()) {
     }
 } else if ($_POST != array()) {
     if ($_POST["action"] == "new") { // NEW
+<<<<<<< HEAD
         $message = "Los datos de <strong>".$_POST["name"]."</strong> se han ingresado correctamente. ";
+=======
+        $message = "Los datos de la  sesión  <strong>".$_POST["name"]."</strong> se han ingresado correctamente. ";
+>>>>>>> 2a9e3e0b78ab26c1aceb92ff2c8e5e10a2ecb641
    
         // Add final session
          $date=date_create("03/21/2020 03:20:15");
@@ -35,6 +39,10 @@ if ($_GET != array()) {
             "id_company"=>$actual_user->getId_company(), "last_user" => $actual_user->getId_user()));
         // Edit administrator user  
 }
+<<<<<<< HEAD
+=======
+        Utils::redirect("adm_sessions_list.php?message=".$message);
+>>>>>>> 2a9e3e0b78ab26c1aceb92ff2c8e5e10a2ecb641
 }
 ?>
 

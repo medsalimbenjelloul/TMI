@@ -7,8 +7,13 @@ class EventDB extends DB{
     public function getData( $like="" ){
         $data=array();
         try{
+<<<<<<< HEAD
             $sql = "SELECT event.id_event, event.name, event.detail, event.id_company, event.last_update, event.last_user, event.was_deleted
                        FROM event event
+=======
+            $sql = "SELECT event.name, event.detail, event.id_company, event.last_update, event.last_user, event.was_deleted
+                       FROM event 
+>>>>>>> 2a9e3e0b78ab26c1aceb92ff2c8e5e10a2ecb641
                         where   event.was_deleted = 0";
             $result = $this->executeSelect($sql, array("search" => "%".strtoupper($like)."%") );            
             foreach($result as $row){
@@ -23,8 +28,13 @@ class EventDB extends DB{
     
     public function searchData( $param ){        
         try{
+<<<<<<< HEAD
             $sql = "SELECT event.id_event,event.name, event.detail, event.id_company, event.last_update, event.last_user, event.was_deleted
                        FROM event event
+=======
+            $sql = "SELECT event.name, event.detail, event.id_company, event.last_update, event.last_user, event.was_deleted
+                       FROM event 
+>>>>>>> 2a9e3e0b78ab26c1aceb92ff2c8e5e10a2ecb641
                         where   event.was_deleted = 0";
             $result = $this->executeSelect($sql, $param );
             return $result==array() ? $result : (new Event($result[0]));

@@ -73,6 +73,7 @@ require_once MODEL."EventDB.php";
 
                                             <th scope="row" class="text-center"><?php echo $n; ?></th>
                                             <td class="text-center"><?php echo $row->getName(); ?></td>
+<<<<<<< HEAD
                                              <td class="text-center"><?php echo $row->getDetail(); ?></td>
                                                <td class="text-center"><?php echo $row->getDetail(); ?></td>
                                          
@@ -88,6 +89,15 @@ require_once MODEL."EventDB.php";
                                                  <a href="<?php echo VIEW_URL;?>adm_event.php?action=view" title="Ver" class="btn btn-warning btn-sm"><i class="far fa-file-alt m-1">
                                                      
                                                  </i>Solo Ver</a>
+=======
+                                            <td><?php echo $row->getDetail(); ?></td>
+                                            <td><?php echo $row->getDetail(); ?></td>
+
+                                            <td>
+                                                 <a href="<?php echo VIEW_URL;?>adm_event.php?action=edit" title="Editar" class="btn btn-primary btn-sm"><i class="far fa-edit m-1"></i>Editar</a>
+                                                 <a href="<?php echo VIEW_URL; ?>adm_events_list.php?action=delete&id=<?php echo $row->getId_event(); ?>&name=<?php echo $row->getName(); ?>" title="Eliminar" class="btn btn-danger btn-sm" onclick="return confirm('¿Esta seguro de borrar el evento <?php echo $row->getName(); ?>?')"><i class="fas fa-trash-alt m-1"></i>Eliminar</a>
+                                                 <a href="<?php echo VIEW_URL;?>adm_event.php?action=view" title="Ver" class="btn btn-warning btn-sm"><i class="far fa-file-alt m-1"></i>Solo Ver</a>
+>>>>>>> 2a9e3e0b78ab26c1aceb92ff2c8e5e10a2ecb641
                                                  <a href="<?php echo VIEW_URL;?>adm_sessions_list.php?action=copy" title="Sesiones" class="btn btn-info btn-sm"><i class="far fa-copy m-1"></i>Sesiones</a>
                                             </td>
                                         </tr>
@@ -115,6 +125,7 @@ require_once MODEL."EventDB.php";
         <!-- JavaScript -->
         <script src="<?php echo VIEW_JS_URL; ?>jquery-3.4.1.min.js"></script>
         <script src="<?php echo VIEW_JS_URL; ?>bootstrap.min.js"></script>
+<<<<<<< HEAD
         <script>        
             function copyToClipboard(elemento) {
                 var $temp = $("<input>")
@@ -124,6 +135,8 @@ require_once MODEL."EventDB.php";
                 $temp.remove();
              }
             </script>
+=======
+>>>>>>> 2a9e3e0b78ab26c1aceb92ff2c8e5e10a2ecb641
 
     </body>
 </html>

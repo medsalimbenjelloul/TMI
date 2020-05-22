@@ -1,8 +1,12 @@
 <?php
 require_once "security.php";
 require_once MODEL . "EventDB.php";
+<<<<<<< HEAD
 require_once MODEL . "RoleCompanyDB.php";
 require_once MODEL . "RoleDB.php";
+=======
+
+>>>>>>> 2a9e3e0b78ab26c1aceb92ff2c8e5e10a2ecb641
 
 $action = "";
 $event = array();
@@ -20,7 +24,11 @@ if ($_GET != array()) {
 } else if ($_POST != array()) {
     if ($_POST["action"] == "new") { 
         // NEW
+<<<<<<< HEAD
         $message = "Los datos de <strong>".$_POST["name"]."</strong> se han ingresado correctamente. ";
+=======
+        $message = "Los datos del evento <strong>".$_POST["name"]."</strong> se han ingresado correctamente. ";
+>>>>>>> 2a9e3e0b78ab26c1aceb92ff2c8e5e10a2ecb641
         // Add final event
         $id_event = (new EventDB())->insertData(array( "name"=>$_POST["name"], "detail"=>$_POST["detail"], "id_company"=>$actual_user->getId_company(),"last_user" => $actual_user->getId_user() ));
 
@@ -28,11 +36,17 @@ if ($_GET != array()) {
         $message = "Los datos de <strong>".$_POST["name"]."</strong> se han modificado correctamente. ";
         // Edit event
         $id_event = (new EventDB())->insertData(array( "name"=>$_POST["name"], "detail"=>$_POST["detail"], "id_company"=>$actual_user->getId_company(),"last_user" => $actual_user->getId_user() ));
+<<<<<<< HEAD
 
         
     }
     Utils::redirect("adm_events_list.php?message=".$message);
 } 
+=======
+    }
+        Utils::redirect("adm_events_list.php?message=".$message);
+}
+>>>>>>> 2a9e3e0b78ab26c1aceb92ff2c8e5e10a2ecb641
 
 
 ?>
@@ -87,6 +101,7 @@ if ($_GET != array()) {
                             </div>
                             <div class="form-group row">
                                 <label for="detail" class="col-sm-2 col-form-label">Detalle</label>
+<<<<<<< HEAD
                                 <div class="col-sm-10">
                                     <textarea class="form-control" id="idetail"  name="detail" rows="5" <?php echo ($action=="view") ? "readonly" : ""; ?> ><?php echo ($action=="view" || $action=="edit"); ?></textarea>
                                 </div>
@@ -110,6 +125,14 @@ if ($_GET != array()) {
                               <!-- Buttons -->
                          
 
+=======
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" id="idetail"  name="detail" rows="5" <?php echo ($action=="view") ? "readonly" : ""; ?> ><?php echo ($action=="view" || $action=="edit"); ?></textarea>
+                                </div>
+                            </div>                                                                                                            
+                            <!-- Buttons -->
+                              <!-- Buttons -->
+>>>>>>> 2a9e3e0b78ab26c1aceb92ff2c8e5e10a2ecb641
                             <div class="form-group row">                              
                                 <div class="col text-right">
                                     <?php if($action=="new" || $action=="edit"){ ?>
@@ -124,8 +147,11 @@ if ($_GET != array()) {
                                     ?>
                                 </div>
                             </div>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 2a9e3e0b78ab26c1aceb92ff2c8e5e10a2ecb641
                         </form>
                         
                     </div>                  
