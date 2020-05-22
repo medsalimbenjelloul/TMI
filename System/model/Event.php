@@ -16,7 +16,7 @@ class Event {
     
     public function __construct($row) {
         
-        $this->id_event = $row["id_event"];
+        $this->id_user = isset($row["id_event"]) ?  $row["id_event"] : "";
         $this->name = $row["name"];
         $this->detail = $row["detail"];
         $this->id_company = $row["id_company"];

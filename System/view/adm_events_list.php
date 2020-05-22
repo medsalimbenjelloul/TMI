@@ -1,12 +1,11 @@
-
 <?php
 require_once "security.php";
-require_once MODEL."UserDB.php";
+require_once MODEL."EventDB.php";
 ?>
 <!doctype html>
 <html lang="es">
     <head>
-        <title>Lista de Eventos y Sesiones</title>
+        <title>Lista de eventos y sesiones</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,10 +27,9 @@ require_once MODEL."UserDB.php";
             <div class="container-fluid">
                 <div class="row ">                    
                     <div class="col text-center">
-                        <br><br>
-                        <h1 class="h1 mt-5 pt-2">Lista de Eventos y Sesiones</span>
+                        <h1 class="h1 mt-5 pt-2">Lista de eventos y sesiones</span>
                     </div>                  
-                </div>
+                </div>  
                 <div class="row">                    
                     <div class="col text-center">
                         <?php if (isset($_GET["message"])) { ?>
@@ -57,13 +55,13 @@ require_once MODEL."UserDB.php";
                                     <th scope="col" class="text-center" style="width:50px">#</th>
                                     <th scope="col" class="text-center">Evento</th>
                                     <th scope="col" class="text-center">Detalle</th>
-                                    <th scope="col" class="text-center" style="width:100px">Expositor</th>
+                                    <th scope="col" class="text-center">Sesiones</th>
                                     <th scope="col" class="text-center" style="width:430px">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                $list = (new UserDB())->getData();
+                                 <?php
+                                $list = (new EventDB())->getData();
                                 $n = 0;
                                 if ($list != array()) {
                                     foreach ($list as $row) {
@@ -71,15 +69,15 @@ require_once MODEL."UserDB.php";
                                 ?>
                                         <tr>
                                             <th scope="row" class="text-center"><?php echo $n; ?></th>
-                                            <td class="text-center"><?php echo $row->getUsername(); ?></td>
-                                            <td><?php echo $row->getRole_name(); ?></td>
-                                            <td class="text-center"><?php echo $row->getActive()==1 ? "Si" : "No";?></td>
+                                            <td class="text-center"><?php echo $row->getName(); ?></td>
+                                            <td><?php echo $row->getDetail(); ?></td>
+                                            <td><?php echo $row->getDetail(); ?></td>
+
                                             <td>
-                                                <a href="<?php echo VIEW_URL; ?>adm_event.php?action=edit&id=<?php echo $row->getId_user(); ?>" title="Editar" class="btn btn-primary btn-sm"><i class="far fa-edit m-1"></i>Editar</a>
-                                                <a href="<?php echo VIEW_URL; ?>adm_user.php?action=delete&id=<?php echo $row->getId_user(); ?>&name=<?php echo $row->getUsername(); ?>" title="Eliminar" class="btn btn-danger btn-sm" onclick="return confirm('¿Esta seguro de borrar el usuario <?php echo $row->getUsername(); ?>?')"><i class="fas fa-trash-alt m-1"></i>Eliminar</a>
-                                                <a href="<?php echo VIEW_URL; ?>adm_event.php?action=view&id=<?php echo $row->getId_user(); ?>" title="Ver" class="btn btn-warning btn-sm"><i class="far fa-file-alt m-1"></i>Solo Ver</a>                                                
-                                                <p id="url<?php echo $row->getId_user(); ?>" style="display: none"><?php echo $row->getPassword(); ?></p>                                                
-                                                <a href="#" title="Copiar contraseña encriptada" class="btn btn-info btn-sm" onclick="copyToClipboard('#url<?php echo $row->getId_user(); ?>')"><i class="far fa-copy m-1"></i>Copiar Contraseña</a>                                                
+                                                 <a href="<?php echo VIEW_URL;?>adm_event.php?action=edit" title="Editar" class="btn btn-primary btn-sm"><i class="far fa-edit m-1"></i>Editar</a>
+                                                 <a href="<?php echo VIEW_URL; ?>adm_events_list.php?action=delete&id=<?php echo $row->getId_event(); ?>&name=<?php echo $row->getName(); ?>" title="Eliminar" class="btn btn-danger btn-sm" onclick="return confirm('¿Esta seguro de borrar el evento <?php echo $row->getName(); ?>?')"><i class="fas fa-trash-alt m-1"></i>Eliminar</a>
+                                                 <a href="<?php echo VIEW_URL;?>adm_event.php?action=view" title="Ver" class="btn btn-warning btn-sm"><i class="far fa-file-alt m-1"></i>Solo Ver</a>
+                                                 <a href="<?php echo VIEW_URL;?>adm_sessions_list.php?action=copy" title="Sesiones" class="btn btn-info btn-sm"><i class="far fa-copy m-1"></i>Sesiones</a>
                                             </td>
                                         </tr>
                                 <?php
@@ -91,7 +89,7 @@ require_once MODEL."UserDB.php";
                                     </tr>
                                 <?php
                                 }
-                                ?>
+                                ?>               
                             </tbody>
                         </table>
                         </div>
@@ -106,14 +104,6 @@ require_once MODEL."UserDB.php";
         <!-- JavaScript -->
         <script src="<?php echo VIEW_JS_URL; ?>jquery-3.4.1.min.js"></script>
         <script src="<?php echo VIEW_JS_URL; ?>bootstrap.min.js"></script>
-        <script>        
-            function copyToClipboard(elemento) {
-                var $temp = $("<input>")
-                $("body").append($temp);
-                $temp.val($(elemento).text()).select();
-                document.execCommand("copy");
-                $temp.remove();
-             }
-            </script>
+
     </body>
 </html>
