@@ -16,7 +16,7 @@ class Event {
     
     public function __construct($row) {
         
-<<<<<<< HEAD
+
         $this->id_event = isset($row["id_event"]) ?  $row["id_event"] : "";
         $this->name = isset($row["name"]) ? $row["name"] : "";
         $this->detail = isset($row["detail"]) ? $row["detail"] : "";
@@ -27,7 +27,7 @@ class Event {
         $this->was_deleted = isset($row["was_deleted"]) ? $row["was_deleted"] : "";
 
   
-=======
+
         $this->id_user = isset($row["id_event"]) ?  $row["id_event"] : "";
         $this->name = $row["name"];
         $this->detail = $row["detail"];
@@ -35,7 +35,7 @@ class Event {
         $this->last_update = $row["last_update"];
         $this->last_user = $row["last_user"];
         $this->was_deleted = $row["was_deleted"];
->>>>>>> 2a9e3e0b78ab26c1aceb92ff2c8e5e10a2ecb641
+
     }
     
     //Methods

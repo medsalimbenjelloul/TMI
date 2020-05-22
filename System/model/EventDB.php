@@ -5,16 +5,11 @@ require_once 'lib/database/DB.php';
 
 class EventDB extends DB{
 
-    public function getData( $like="" ){
+       public function getData( $like="" ){
         $data=array();
         try{
-
             $sql = "SELECT event.id_event, event.name, event.detail, event.id_company, event.last_update, event.last_user, event.was_deleted
                        FROM event event
-
-            $sql = "SELECT event.name, event.detail, event.id_company, event.last_update, event.last_user, event.was_deleted
-                       FROM event 
-
                         where   event.was_deleted = 0";
             $result = $this->executeSelect($sql, array("search" => "%".strtoupper($like)."%") );            
             foreach($result as $row){
@@ -29,13 +24,8 @@ class EventDB extends DB{
     
     public function searchData( $param ){        
         try{
-
             $sql = "SELECT event.id_event,event.name, event.detail, event.id_company, event.last_update, event.last_user, event.was_deleted
                        FROM event event
-
-            $sql = "SELECT event.name, event.detail, event.id_company, event.last_update, event.last_user, event.was_deleted
-                       FROM event 
-
                         where   event.was_deleted = 0";
             $result = $this->executeSelect($sql, $param );
             return $result==array() ? $result : (new Event($result[0]));
