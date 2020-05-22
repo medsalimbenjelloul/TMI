@@ -7,13 +7,12 @@ class EventDB extends DB{
     public function getData( $like="" ){
         $data=array();
         try{
-            $sql = "select  name, detail, id_company, last_update, last_user, was_deleted
-                    from    event  
-                            
-                    where     was_deleted = 0 ";
+            $sql = "SELECT event.id_event, event.name, event.detail, event.id_company, event.last_update, event.last_user, event.was_deleted
+                       FROM event event
+                        where   event.was_deleted = 0";
             $result = $this->executeSelect($sql, array("search" => "%".strtoupper($like)."%") );            
             foreach($result as $row){
-                $data[] = new Company($row);
+                $data[] = new Event($row);
             }
         }
         catch (PDOException $e) {
@@ -24,12 +23,11 @@ class EventDB extends DB{
     
     public function searchData( $param ){        
         try{
-            $sql = "select  name, detail, id_company, last_update, last_user, was_deleted
-                    from    event  
-                            
-                    where     was_deleted = 0 ";
+            $sql = "SELECT event.id_event,event.name, event.detail, event.id_company, event.last_update, event.last_user, event.was_deleted
+                       FROM event event
+                        where   event.was_deleted = 0";
             $result = $this->executeSelect($sql, $param );
-            return $result==array() ? $result : (new Company($result[0]));
+            return $result==array() ? $result : (new Event($result[0]));
         }
         catch (PDOException $e) {
             die("Error: ".$e->getMessage());

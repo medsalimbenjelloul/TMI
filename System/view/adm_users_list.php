@@ -73,9 +73,15 @@ require_once MODEL."UserDB.php";
                                             <td><?php echo $row->getRole_name(); ?></td>
                                             <td class="text-center"><?php echo $row->getActive()==1 ? "Si" : "No";?></td>
                                             <td>
-                                                <a href="<?php echo VIEW_URL; ?>adm_user.php?action=edit&id=<?php echo $row->getId_user(); ?>" title="Editar" class="btn btn-primary btn-sm"><i class="far fa-edit m-1"></i>Editar</a>
-                                                <a href="<?php echo VIEW_URL; ?>adm_user.php?action=delete&id=<?php echo $row->getId_user(); ?>&name=<?php echo $row->getUsername(); ?>" title="Eliminar" class="btn btn-danger btn-sm" onclick="return confirm('¿Esta seguro de borrar el usuario <?php echo $row->getUsername(); ?>?')"><i class="fas fa-trash-alt m-1"></i>Eliminar</a>
-                                                <a href="<?php echo VIEW_URL; ?>adm_user.php?action=view&id=<?php echo $row->getId_user(); ?>" title="Ver" class="btn btn-warning btn-sm"><i class="far fa-file-alt m-1"></i>Solo Ver</a>                                                
+                                                <a href="<?php echo VIEW_URL; ?>adm_user.php?action=edit&id=<?php echo $row->getId_user(); ?>" title="Editar" class="btn btn-primary btn-sm"><i class="far fa-edit m-1">
+                                                    
+                                                </i>Editar</a>
+                                                <a href="<?php echo VIEW_URL; ?>adm_user.php?action=delete&id=<?php echo $row->getId_user(); ?>&name=<?php echo $row->getUsername(); ?>" title="Eliminar" class="btn btn-danger btn-sm" onclick="return confirm('¿Esta seguro de borrar el usuario <?php echo $row->getUsername(); ?>?')"><i class="fas fa-trash-alt m-1">
+                                                    
+                                                </i>Eliminar</a>
+                                                <a href="<?php echo VIEW_URL; ?>adm_user.php?action=view&id=<?php echo $row->getId_user(); ?>" title="Ver" class="btn btn-warning btn-sm"><i class="far fa-file-alt m-1">
+                                                    
+                                                </i>Solo Ver</a>                                                
                                                 <p id="url<?php echo $row->getId_user(); ?>" style="display: none"><?php echo $row->getPassword(); ?></p>                                                
                                                 <a href="#" title="Copiar contraseña encriptada" class="btn btn-info btn-sm" onclick="copyToClipboard('#url<?php echo $row->getId_user(); ?>')"><i class="far fa-copy m-1"></i>Copiar Contraseña</a>                                                
                                             </td>
