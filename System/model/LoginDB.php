@@ -15,7 +15,7 @@ class LoginDB extends DB{
                                 inner join role_company rc on u.id_user = rc.id_user 
                                 inner join role r on rc.id_role = r.id_role 
                                 inner join company c on rc.id_company = c.id_company 
-                                inner join image i on c.logo = i.id_image 
+                                left join image i on c.logo = i.id_image and i.was_deleted = 0 
                                 left join person p on u.id_user = p.id_user and p.was_deleted = 0
                     where	u.username = :username 
                                 and (u.password = md5(:password) or u.password = :password)
@@ -25,7 +25,7 @@ class LoginDB extends DB{
                                 and rc.was_deleted = 0
                                 and r.was_deleted = 0
                                 and c.was_deleted = 0
-                                and i.was_deleted = 0";
+                                ";
             $result = $this->executeSelect($sql, $data );
             return $result==array() ? $result : (new Login($result[0]));
         }

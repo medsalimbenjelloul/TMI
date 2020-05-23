@@ -65,5 +65,14 @@ class PersonDB extends DB{
         
         return $filasAfectadas;
     }
+
+    //Método de actualización de registros de la base de datos
+    public function updateDataPersonId($param){
+        $sql = "UPDATE  person
+                SET     person_id = :person_id, last_update=current_timestamp(), last_user=:last_user, was_deleted=0
+                WHERE   id_person = :id_person";
+        $filasAfectadas = $this->executeDML($sql, $param);
+        return $filasAfectadas;
+    }    
 }
 ?>

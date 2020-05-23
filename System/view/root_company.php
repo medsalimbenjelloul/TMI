@@ -24,14 +24,14 @@ if ($_GET != array()) {
     } else if($action == "group_person"){ // GROUP PERSON        
         $message = "Para la empresa <strong>".$_GET["name"]."</strong>, se genero correctamente el Group Person ID.";
         // Add Group person
-        $personGroup = CognitiveServices::getPersonGroup($_GET["api_key"], $_GET["id"]);
+        $personGroup = CognitiveServices::getPersonGroup($_GET["api_key"], array("id_company"=>$_GET["id"],"last_user"=>$actual_user->getId_user()) );
         $person_group_id = null;
         if($personGroup["id"]!= -1 && $personGroup["id"]!= -2){
             $person_group_id = $personGroup["id"];
+            (new CompanyDB())->updatePersonGroup( array("last_user"=>$actual_user->getId_user(),"id_company"=>$_GET["id"],"person_group_id"=>$person_group_id) );
         } else{
             $message = "Error al generar el Group Person ID:".$personGroup["error"];            
-        }
-        (new CompanyDB())->updatePersonGroup( array("last_user"=>$actual_user->getId_user(),"id_company"=>$_GET["id"],"person_group_id"=>$person_group_id) );
+        }        
         //echo $message;
         Utils::redirect("root_companies_list.php?message=".$message);
     }
@@ -57,9 +57,19 @@ if ($_GET != array()) {
         // Add administrator user
         $id_user = (new UserDB())->insertData(array( "username"=>$_POST["username"], "password"=>md5($_POST["password"]), "active"=>$_POST["usractive"], "id_company"=>$id_company,"last_user" => $actual_user->getId_user() ));
         // Add role company
-        $response = (new RoleCompanyDB())->insertData(array( "id_company"=>$id_company, "id_user"=>$id_user, "id_role"=>2 ,"last_user" => $actual_user->getId_user() ));
+        $response = (new RoleCompanyDB())->insertData(array( "id_company"=>$id_company, "id_user"=>$id_user, "id_role"=>2 ,"last_user" => $actual_user->getId_user() ));        
+        // Add Group person
+        $personGroup = CognitiveServices::getPersonGroup($_POST["api_key"], array("id_company"=>$id_company,"last_user"=>$actual_user->getId_user()) );
+        $person_group_id = null;
+        if($personGroup["id"]!= -1 && $personGroup["id"]!= -2){
+            $person_group_id = $personGroup["id"];
+            $message = $message . "Para la empresa <strong>".$_POST["name"]."</strong>, se genero correctamente el Group Person ID.";
+            (new CompanyDB())->updatePersonGroup( array("last_user"=>$actual_user->getId_user(),"id_company"=>$id_company,"person_group_id"=>$person_group_id) );
+        } else{
+            $message = $message . "Error al generar el Group Person ID:".$personGroup["error"];            
+        }
     } else if ($_POST["action"] == "edit") { // EDIT
-        $id_image = $_POST["logo"];
+        $id_image = $_POST["logo"]==""?null:$_POST["logo"];
         $message = "Los datos de <strong>".$_POST["name"]."</strong> se han modificado correctamente. ";
         // Edit image
         If($_FILES!=array() && $_FILES['image']['size'] > 0){
