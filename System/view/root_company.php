@@ -22,7 +22,7 @@ if ($_GET != array()) {
         $message = "La empresa <strong>".$_GET["name"]."</strong> se elimino correctamente.";
         Utils::redirect("root_companies_list.php?message=".$message);
     } else if($action == "group_person"){ // GROUP PERSON        
-        $message = "Para la empresa <strong>".$_GET["name"]."</strong>, se genero correctamente el Group Person ID.";
+        $message = "Para la empresa <strong>".$_GET["name"]."</strong>, se genero correctamente el Group Person ID en Azure.";
         // Add Group person
         $personGroup = CognitiveServices::getPersonGroup($_GET["api_key"], array("id_company"=>$_GET["id"],"last_user"=>$actual_user->getId_user()) );
         $person_group_id = null;
@@ -30,7 +30,7 @@ if ($_GET != array()) {
             $person_group_id = $personGroup["id"];
             (new CompanyDB())->updatePersonGroup( array("last_user"=>$actual_user->getId_user(),"id_company"=>$_GET["id"],"person_group_id"=>$person_group_id) );
         } else{
-            $message = "Error al generar el Group Person ID:".$personGroup["error"];            
+            $message = "Error al generar el Group Person ID en Azure:".$personGroup["error"];            
         }        
         //echo $message;
         Utils::redirect("root_companies_list.php?message=".$message);
@@ -63,10 +63,10 @@ if ($_GET != array()) {
         $person_group_id = null;
         if($personGroup["id"]!= -1 && $personGroup["id"]!= -2){
             $person_group_id = $personGroup["id"];
-            $message = $message . "Para la empresa <strong>".$_POST["name"]."</strong>, se genero correctamente el Group Person ID.";
+            $message = $message . "Para la empresa <strong>".$_POST["name"]."</strong>, se genero correctamente el Group Person ID en Azure.";
             (new CompanyDB())->updatePersonGroup( array("last_user"=>$actual_user->getId_user(),"id_company"=>$id_company,"person_group_id"=>$person_group_id) );
         } else{
-            $message = $message . "Error al generar el Group Person ID:".$personGroup["error"];            
+            $message = $message . "Error al generar el Group Person ID en Azure:".$personGroup["error"];            
         }
     } else if ($_POST["action"] == "edit") { // EDIT
         $id_image = $_POST["logo"]==""?null:$_POST["logo"];

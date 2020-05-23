@@ -62,4 +62,51 @@ VALUES('No asistió', 'No asistió.', CURRENT_TIMESTAMP(), 1, 0);
 INSERT INTO assistance_status (name, detail, last_update, last_user, was_deleted)
 VALUES('Permiso', 'Permiso.', CURRENT_TIMESTAMP(), 1, 0);
 
+-- emotions
+INSERT INTO emotion_type
+(name, source_name, last_update, last_user, was_deleted)
+VALUES('Desprecio', 'contempt', CURRENT_TIMESTAMP(), 1, 0);
 
+INSERT INTO emotion_type
+(name, source_name, last_update, last_user, was_deleted)
+VALUES('Asco', 'disgust', CURRENT_TIMESTAMP(), 1, 0);
+
+INSERT INTO emotion_type
+(name, source_name, last_update, last_user, was_deleted)
+VALUES('Miedo', 'fear', CURRENT_TIMESTAMP(), 1, 0);
+
+INSERT INTO emotion_type
+(name, source_name, last_update, last_user, was_deleted)
+VALUES('Felicidad', 'happiness', CURRENT_TIMESTAMP(), 1, 0);
+
+INSERT INTO emotion_type
+(name, source_name, last_update, last_user, was_deleted)
+VALUES('Neutral', 'neutral', CURRENT_TIMESTAMP(), 1, 0);
+
+INSERT INTO emotion_type
+(name, source_name, last_update, last_user, was_deleted)
+VALUES('Tristeza', 'sadness', CURRENT_TIMESTAMP(), 1, 0);
+
+INSERT INTO emotion_type
+(name, source_name, last_update, last_user, was_deleted)
+VALUES('Sorpresa', 'surprise', CURRENT_TIMESTAMP(), 1, 0);
+
+-- faces service
+
+INSERT INTO service_type(name, source_name, last_update, last_user, was_deleted)
+VALUES('persongroups', 'persongroups', CURRENT_TIMESTAMP(), 1, 0);
+
+INSERT INTO service_type(name, source_name, last_update, last_user, was_deleted)
+VALUES('persons', 'persons', CURRENT_TIMESTAMP(), 1, 0);
+
+INSERT INTO service_type(name, source_name, last_update, last_user, was_deleted)
+VALUES('persistedFaces', 'persistedFaces', CURRENT_TIMESTAMP(), 1, 0);
+
+INSERT INTO service_type(name, source_name, last_update, last_user, was_deleted)
+VALUES('train', 'train', CURRENT_TIMESTAMP(), 1, 0);
+
+INSERT INTO service_type(name, source_name, last_update, last_user, was_deleted)
+VALUES('detect', 'detect', CURRENT_TIMESTAMP(), 1, 0);
+
+INSERT INTO service_type(name, source_name, last_update, last_user, was_deleted)
+VALUES('identify', 'identify', CURRENT_TIMESTAMP(), 1, 0);
