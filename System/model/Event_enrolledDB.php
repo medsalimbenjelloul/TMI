@@ -1,5 +1,7 @@
 <?php
 require_once 'Event_enrolled.php';
+require_once 'Event.php';
+require_once  'ExponenteProxy.php';
 require_once 'lib/database/DB.php';
 
 class Event_enrolledDB extends DB{
@@ -32,6 +34,8 @@ class Event_enrolledDB extends DB{
         
         return $filasAfectadas;
     }
+    
+    
 }
     
 

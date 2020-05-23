@@ -94,6 +94,65 @@ class EventDB extends DB{
         return $data;
     }
     
+    
+    public function listarAsistente() {
+        $data = array();
+        try {
+            $sql = "SELECT\n" .
+                    "person.first_surname,\n" .
+                    "person.second_surname,\n" .
+                    "role.id_role,\n" .
+                    "role_company.id_company,\n" .
+                    "`user`.id_user,\n" .
+                    "person.id_person\n" .
+                    "FROM\n" .
+                    "role\n" .
+                    "INNER JOIN role_company ON role_company.id_role = role.id_role\n" .
+                    "INNER JOIN `user` ON role_company.id_user = `user`.id_user\n" .
+                    "INNER JOIN person ON person.id_user = `user`.id_user\n" .
+                    "WHERE\n" .
+                    "role.`name` = 'Asistente'";
+
+            $result = $this->executeSelect($sql);
+            foreach ($result as $row) {
+                $data[] = new ExponenteProxy($row);
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+
+        return $data;
+    }
+    
+    public function listarControlador() {
+        $data = array();
+        try {
+            $sql = "SELECT\n" .
+                    "person.first_surname,\n" .
+                    "person.second_surname,\n" .
+                    "role.id_role,\n" .
+                    "role_company.id_company,\n" .
+                    "`user`.id_user,\n" .
+                    "person.id_person\n" .
+                    "FROM\n" .
+                    "role\n" .
+                    "INNER JOIN role_company ON role_company.id_role = role.id_role\n" .
+                    "INNER JOIN `user` ON role_company.id_user = `user`.id_user\n" .
+                    "INNER JOIN person ON person.id_user = `user`.id_user\n" .
+                    "WHERE\n" .
+                    "role.`name` = 'Controlador'";
+
+            $result = $this->executeSelect($sql);
+            foreach ($result as $row) {
+                $data[] = new ExponenteProxy($row);
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+
+        return $data;
+    }
+    
     public function findExponenteById($id_person) {
         try {
             $sql = "SELECT\n" .
