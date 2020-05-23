@@ -8,9 +8,11 @@ class SessionDB extends DB{
     public function getData( $like="" ){
         $data=array();
         try{
-            $sql = "select  name, detail, when_datetime,id_company, 
-                                    last_update, last_user, was_deleted
-                    from    session"; 
+             $sql = "select s.id_session, s.name, s.detail, s.when_datetime, s.id_company, s.last_update, 
+                    s.last_user, s.was_deleted, e.id_event, s.id_event from session s 
+                    INNER JOIN event e 
+                    on e.id_event = s.id_event 
+                    where s.was_deleted = 0";
             $result = $this->executeSelect($sql, array("search" => "%".strtoupper($like)."%") );            
             foreach($result as $row){
                 $data[] = new Session($row);
@@ -24,14 +26,13 @@ class SessionDB extends DB{
     
     public function searchData( $param ){        
         try{
-            $sql = "select  s.id_session, s.name, s.detail, s.when_datetime, e.id_event, 
-                     e.id_company, s.last_update, s.last_user, s.was_deleted
-                    from    session s
-                    join event e
-                    where   s.id_event = e.id_event
-                    and   c.was_deleted = 0 and e.id_company = :id_company ";
+            $sql = "select s.id_session, s.name, s.detail, s.when_datetime, s.id_company, s.last_update, 
+                    s.last_user, s.was_deleted, e.id_event, s.id_event from session s 
+                    INNER JOIN event e 
+                    on e.id_event = s.id_event 
+                    where s.was_deleted = 0";
             $result = $this->executeSelect($sql, $param );
-            return $result==array() ? $result : (new Company($result[0]));
+            return $result==array() ? $result : (new Session($result[0]));
         }
         catch (PDOException $e) {
             die("Error: ".$e->getMessage());
@@ -54,7 +55,7 @@ class SessionDB extends DB{
     //Método de actualización de registros de la base de datos
     public function updateData($param){
         $sql = "UPDATE session
-                SET name=:name, detail=:detail, when_datetime=:current_timestamp(), id_company=:id_company, last_update=current_timestamp(), last_user=:last_user, was_deleted=0
+                SET id_session= :id_session, name=:name, detail=:detail, when_datetime=:current_timestamp(), id_company=:id_company, last_update=current_timestamp(), last_user=:last_user, was_deleted=0
                 WHERE id_session=:id_session";
         $filasAfectadas = $this->executeDML($sql, $param);
         return $filasAfectadas;

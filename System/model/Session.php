@@ -14,15 +14,15 @@ class Session {
     
     
     function __construct($row) {
-        $this->id_user = isset($row["id_session"]) ?  $row["id_session"] : "";
-        $this->name = $row["name"];
-        $this->detail = $row["detail"];
-        $this->when_datetime = $row["when_datetime"];
-        $this->id_user = isset($row["id_event"]) ?  $row["id_event"] : "";
-        $this->id_company = $row["id_company"];
-        $this->last_update = $row["last_update"];
-        $this->last_user = $row["last_user"];
-        $this->was_deleted = $row["was_deleted"];
+        $this->id_session = isset($row["id_session"]) ?  $row["id_session"] : "";
+        $this->name = isset($row["name"]) ?  $row["name"] : "";
+        $this->detail = isset($row["detail"]) ?  $row["detail"] : "";
+        $this->when_datetime = isset($row["when_datetime"]) ?  $row["when_datetime"] : "";
+        $this->id_event = isset($row["id_event"]) ?  $row["id_event"] : "";
+        $this->id_company = isset($row["id_company"]) ?  $row["id_company"] : "";
+        $this->last_update =isset($row["last_update"]) ?  $row["last_update"] : "";
+        $this->last_user = isset($row["last_user"]) ?  $row["last_user"] : "";
+        $this->was_deleted = isset($row["was_deleted"]) ?  $row["was_deleted"] : "";
     }
 
     function setId_session($id_session) {

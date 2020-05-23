@@ -17,9 +17,9 @@ class Event_enrolled {
         $this->id_company = isset($row["id_company"]) ? $row["id_company"] : "";
         $this->id_user = isset($row["id_user"]) ?  $row["id_user"] : "";
         $this->id_role = isset($row["id_role"]) ?  $row["id_role"] : "";
-        $this->last_update = $last_update;
-        $this->last_user = $last_user;
-        $this->was_deleted = $was_deleted;
+        $this->last_update = isset($row["last_update"]) ?  $row["last_update"] : "";
+        $this->last_user = isset($row["last_user"]) ?  $row["last_user"] : "";
+        $this->was_deleted = isset($row["was_deleted"]) ?  $row["was_deleted"] : "";
     }
 
     
