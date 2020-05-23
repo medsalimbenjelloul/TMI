@@ -16,13 +16,26 @@ class Event {
     
     public function __construct($row) {
         
-        $this->id_event = $row["id_event"];
+
+        $this->id_event = isset($row["id_event"]) ?  $row["id_event"] : "";
+        $this->name = isset($row["name"]) ? $row["name"] : "";
+        $this->detail = isset($row["detail"]) ? $row["detail"] : "";
+        $this->username = isset($row["username"]) ? $row["username"] : "";
+        $this->id_company = isset($row["id_company"]) ?  $row["id_company"] : "";
+        $this->last_update = isset($row["last_update"]) ? $row["last_update"] : "";
+        $this->last_user= isset($row["last_user"]) ? $row["last_user"] : "";
+        $this->was_deleted = isset($row["was_deleted"]) ? $row["was_deleted"] : "";
+
+  
+
+        $this->id_user = isset($row["id_event"]) ?  $row["id_event"] : "";
         $this->name = $row["name"];
         $this->detail = $row["detail"];
         $this->id_company = $row["id_company"];
         $this->last_update = $row["last_update"];
         $this->last_user = $row["last_user"];
         $this->was_deleted = $row["was_deleted"];
+
     }
     
     //Methods

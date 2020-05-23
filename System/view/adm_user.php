@@ -18,7 +18,8 @@ if ($_GET != array()) {
         Utils::redirect("adm_users_list.php?message=".$message);
     }
 } else if ($_POST != array()) {
-    if ($_POST["action"] == "new") { // NEW
+    if ($_POST["action"] == "new") { 
+    // NEW
         $message = "Los datos de <strong>".$_POST["username"]."</strong> se han ingresado correctamente. ";
         // Add final user
         $id_user = (new UserDB())->insertData(array( "username"=>$_POST["username"], "password"=>md5($_POST["password"]), "active"=>$_POST["active"], "id_company"=>$actual_user->getId_company(),"last_user" => $actual_user->getId_user() ));
