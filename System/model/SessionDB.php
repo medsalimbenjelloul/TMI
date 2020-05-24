@@ -69,6 +69,25 @@ class SessionDB extends DB{
         $filasAfectadas = $this->executeDML($sql, $param);
         
         return $filasAfectadas;
-    }   
+    }  
+    
+    public function getDataEventSession( $param = array() ){
+        $data=array();
+        try{
+             $sql = "select s.id_session, s.name, s.detail, s.when_datetime, s.id_company, s.last_update, 
+                    s.last_user, s.was_deleted, e.id_event, s.id_event from session s 
+                    INNER JOIN event e 
+                    on e.id_event = s.id_event 
+                    where s.was_deleted = 0";
+            $result = $this->executeSelect($sql, array("search" => "%".strtoupper($like)."%") );            
+            foreach($result as $row){
+                $data[] = new Session($row);
+            }
+        }
+        catch (PDOException $e) {
+            die("Error: ".$e->getMessage());
+        } 
+        return $data;
+    }    
 }
 ?>
