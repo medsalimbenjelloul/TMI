@@ -1,3 +1,5 @@
+CREATE DATABASE tmi;
+USE tmi;
 --
 -- ER/Studio Data Architect 10.0 SQL Code Generation
 -- Project :      db_model.DM1
