@@ -56,12 +56,12 @@ require_once MODEL."UserDB.php";
                                     <th scope="col" class="text-center">Usuario</th>
                                     <th scope="col" class="text-center">Rol</th>
                                     <th scope="col" class="text-center" style="width:100px">Activo</th>
-                                    <th scope="col" class="text-center" style="width:430px">Acciones</th>
+                                    <th scope="col" class="text-center" style="width:525px">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $list = (new UserDB())->getData();
+                                $list = (new UserDB())->getData(array("id_company"=>$actual_user->getId_company()));
                                 $n = 0;
                                 if ($list != array()) {
                                     foreach ($list as $row) {
@@ -84,6 +84,11 @@ require_once MODEL."UserDB.php";
                                                 </i>Solo Ver</a>                                                
                                                 <p id="url<?php echo $row->getId_user(); ?>" style="display: none"><?php echo $row->getPassword(); ?></p>                                                
                                                 <a href="#" title="Copiar contraseña encriptada" class="btn btn-info btn-sm" onclick="copyToClipboard('#url<?php echo $row->getId_user(); ?>')"><i class="far fa-copy m-1"></i>Copiar Contraseña</a>                                                
+                                                <?php if($row->getId_person()!= null){ ?>
+                                                <a href="<?php echo VIEW_URL; ?>adm_user.php?action=pgmpt&id=<?php echo $row->getId_user(); ?>&id_person=<?php echo $row->getId_person(); ?>&username=<?php echo $row->getUsername(); ?>&photo_1=<?php echo $row->getPhoto_1(); ?>&photo_2=<?php echo $row->getPhoto_2(); ?>&photo_3=<?php echo $row->getPhoto_3(); ?>" title="Conseguir de Azure el Person Group Member/Photo/Train" class="btn btn-secondary btn-sm" onclick="return confirm('¿Esta seguro de obtener nuevamente el Person Group Member/Photo/Train de <?php echo $row->getUsername(); ?>?')"><i class="fas fa-users m-1"></i>PGMPT</a>
+                                                <?php } else{ ?>
+                                                <button title="No se puede conseguir de Azure el Person Group Member/Photo/Train, porque no tiene asignada una persona." onclick="return alert('No se puede conseguir de Azure el Person Group Member/Photo/Train, porque no tiene asignada una persona.')" class="btn btn-secondary btn-sm" readonly><i class="fas fa-users m-1"></i>PGMPT</button>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                 <?php

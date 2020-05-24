@@ -161,9 +161,10 @@ class CognitiveServices {
     // 3. Person group members photos
     static public function getPersonGroupMemberPhoto($ocpApimSubscriptionKey, $person_group_id, $data) {
         // Photos
-        $photo[0] = VIEW_IMG_URL.$data["photo_1"];
-        $photo[1] = VIEW_IMG_URL.$data["photo_2"];
-        $photo[2] = VIEW_IMG_URL.$data["photo_3"];     
+        $photo[0] = VIEW_PHOTOS_URL.$data["photo_1"];
+        $photo[1] = VIEW_PHOTOS_URL.$data["photo_2"];
+        $photo[2] = VIEW_PHOTOS_URL.$data["photo_3"];    
+        //print_r($photo);        
         //Api(Face)
         $request = new Http_Request2(self::$uriBase . '/persongroups/'.$person_group_id.'/persons/'.$data["person_id"].'/persistedFaces?detectionModel=detection_01');
         $url = $request->getUrl();      
@@ -195,10 +196,18 @@ class CognitiveServices {
                 $response = $request->send();
                 //echo "<pre class='border rounded'>" . json_encode(json_decode($response->getBody()), JSON_PRETTY_PRINT) . "</pre><br/>";
                 $json = json_decode($response->getBody());
-                $data["json_response"] = json_encode($json);
-                $data["id_image"] = $photo[$i];
-                self::insertResponse($data, 3);
-                $messages[$i] = array("ok"=>1,"error"=>"");
+                
+                if(!isset($json->error)){                
+                    $data["json_response"] = json_encode($json);
+                    $data["id_image"] = $data["photo_".($i+1)];
+                    self::insertResponse($data, 3);
+                    $messages[$i] = array("ok"=>1,"error"=>"");
+                } else{
+                    $data["json_response"] = json_encode($json);
+                    $data["id_image"] = $data["photo_".($i+1)];
+                    self::insertResponse($data, 3);
+                    $messages[$i] = array("ok"=>0,"error"=>"Error en el servicio Faces Photo, ver el log.");  
+                }
             }
             catch (HttpException $ex)
             {
@@ -238,9 +247,15 @@ class CognitiveServices {
             $response = $request->send();
             //echo "<pre class='border rounded'>" . json_encode(json_decode($response->getBody()), JSON_PRETTY_PRINT) . "</pre>";
             $json = json_decode($response->getBody());
-            $data["json_response"] = json_encode($json);
-            self::insertResponse($data, 4);
-            return array("ok"=>1,"error"=>"");
+            if($json == null){
+                $data["json_response"] = json_encode($json);
+                self::insertResponse($data, 4);
+                return array("ok"=>1,"error"=>"");                
+            }else{
+                $data["json_response"] = json_encode($json);
+                self::insertResponse($data, 4);
+                return array("ok"=>0,"error"=>"Error al ejecutar el servicio de train.");
+            }
         }
         catch (HttpException $ex)
         {

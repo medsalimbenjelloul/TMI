@@ -84,7 +84,7 @@ if($_POST != array()){
     </head>
     <body class="text-center">
         <form class="form-signin" method="post" action="index.php">
-            <img class="mb-4" src="<?php echo VIEW_LOGO_URL. $company->getImage_name();?>" alt="" width="72" height="72">
+            <img class="mb-4" src="<?php echo $company->getId_company()==1 ? VIEW_LOGO_URL. $company->getImage_name() : VIEW_LOGO_URL. $company->getLogo();?>" alt="" width="72" height="72">
             <h3 class="h3 mb-3 font-weight-normal"><?php echo $company->getName();?></h3>
             <h4 class="h4 mb-3 font-weight-normal">Iniciar sesión</h4>
             <?php

@@ -28,4 +28,5 @@ define('VIEW_UPLOAD_URL', BASE_URL.'view/upload/');
 define('MODEL', ROOT_PATH.'model/');  
 define('MODEL_LIB', MODEL.'lib/');
 define('VIEW', ROOT_PATH.'view/');  
+
 ?>

@@ -2,7 +2,7 @@
         <header>
             <!-- Menu -->
             <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="#"><?php if($actual_user->getImage_name()!=""){ ?><img src="<?php echo VIEW_LOGO_URL.$actual_user->getImage_name();?>" width="30" height="30" class="rounded mr-1" alt="..."><?php } ?> <?php echo $actual_user->getCompany_name();?></a>
+                <a class="navbar-brand" href="#"><?php if($actual_user->getImage_name()!=""){ ?><img src="<?php  echo $actual_user->getId_image() == 1 ? VIEW_LOGO_URL.$actual_user->getImage_name() : VIEW_LOGO_URL.$actual_user->getId_image(); ?>" width="30" height="30" class="rounded mr-1" alt="..."><?php } ?> <?php echo $actual_user->getCompany_name();?></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

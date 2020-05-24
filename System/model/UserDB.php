@@ -5,19 +5,21 @@ require_once 'lib/database/DB.php';
 class UserDB extends DB{
     
     //Methods    
-    public function getData( $like="" ){
+    public function getData( $param = array() ){
         $data=array();
         try{
             $sql = "select  u.id_user, u.username, u.password, u.active, u.id_company, u.last_update, u.last_user, u.was_deleted,
-                            r.id_role, r.name as role_name
+                            r.id_role, r.name as role_name, p.id_person, p.person_id, p.photo_1, p.photo_2, p.photo_3 
                     from    user u
                             inner join role_company rc on u.id_user = rc.id_user 
                             inner join role r on rc.id_role = r.id_role 
+                            left join person p on u.id_user = p.id_user and p.was_deleted = 0 
                     where   u.was_deleted = 0
                             and rc.was_deleted = 0
                             and r.was_deleted = 0
-                            and r.is_only_system = 0";
-            $result = $this->executeSelect($sql, array("search" => "%".strtoupper($like)."%") );            
+                            and r.is_only_system = 0
+                            and u.id_company = :id_company";
+            $result = $this->executeSelect($sql, $param );            
             foreach($result as $row){
                 $data[] = new User($row);
             }

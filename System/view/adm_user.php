@@ -3,6 +3,9 @@ require_once "security.php";
 require_once MODEL . "UserDB.php";
 require_once MODEL . "RoleCompanyDB.php";
 require_once MODEL . "RoleDB.php";
+require_once MODEL . "CognitiveServices.php";
+require_once MODEL . "CompanyDB.php";
+require_once MODEL . "PersonDB.php";
 
 $action = "";
 $user = array();
@@ -15,6 +18,44 @@ if ($_GET != array()) {
     } else if($action == "delete"){ // DELETE
         (new UserDB())->deleteData( array("last_user"=>$actual_user->getId_user(),"id_user"=>$_GET["id"]) );
         $message = "El usuario <strong>".$_GET["name"]."</strong> se elimino correctamente.";
+        Utils::redirect("adm_users_list.php?message=".$message);
+    } else if($action == "pgmpt"){ // Person Group Member/Photo/Train
+        $message = "";
+        // Create person on azure faces service
+        $company = (new CompanyDB())->searchData(array("id_company"=>$actual_user->getId_company()));
+        $api_key = $company->getApi_key();
+        $person_group_id = $company->getPerson_group_id();
+        $personGroupMember = CognitiveServices::getPersonGroupMember($api_key, $person_group_id,
+                array("id_person"=>$_GET["id_person"], "username"=>$_GET["username"], "id_company"=>$actual_user->getId_company(),"last_user"=>$actual_user->getId_user()) );
+        $person_id = null;
+        if($personGroupMember["id"]!= -1 && $personGroupMember["id"]!= -2){
+            $person_id = $personGroupMember["id"];
+            $message = $message . "Para el usuario <strong>".$_GET["username"]."</strong>, se genero correctamente el Person ID en Azure: ".$person_id.". ";            
+            (new PersonDB())->updateDataPersonId( array("last_user"=>$actual_user->getId_user(),"id_person"=>$id_person,"person_id"=>$personGroupMember["id"]) );
+        } else{
+            $message = $message . "Error al generar el Person ID:".$personGroupMember["error"];            
+        } 
+        // Upload images to azure faces service 
+        $responsePhotos = CognitiveServices::getPersonGroupMemberPhoto($api_key, $person_group_id,
+                array("person_id"=>$person_id, "photo_1"=>$_GET["photo_1"], "photo_2"=>$_GET["photo_2"], "photo_3"=>$_GET["photo_3"], 
+                    "id_company"=>$actual_user->getId_company(),
+                    "last_user"=>$actual_user->getId_user()) );
+        for($i=0; $i<3; $i++){
+            if(($responsePhotos[$i])["ok"]!= 0){
+                $message = $message . "Ingreso correcto <strong> Foto ".($i+1)."</strong> en Azure. ";
+            } else{
+                $message = $message . "Error al generar Foto ".($i+1)." en Azure:".($responsePhotos[$i])["error"].". ";            
+            } 
+        }
+        // Train on azure faces service
+         $responseTrain = CognitiveServices::getPersonGroupTrain($api_key, $person_group_id,
+                array("id_company"=>$actual_user->getId_company(), "last_user"=>$actual_user->getId_user() ) );
+        if($responseTrain["ok"] != 0){
+            $message = $message . "Train correcto del modelo en Azure. ";
+        } else{
+            $message = $message . "Error al realizar el train del modelo en Azure:".$responseTrain["error"].". ";            
+        }     
+        
         Utils::redirect("adm_users_list.php?message=".$message);
     }
 } else if ($_POST != array()) {

@@ -102,7 +102,7 @@ if ( ($_GET != array()) && ($action == "edit") ) {
             $person_id = $personGroupMember["id"];
             (new PersonDB())->updateDataPersonId( array("last_user"=>$actual_user->getId_user(),"id_person"=>$id_person,"person_id"=>$personGroupMember["id"]) );
         } else{
-            $message = $message . "Error al generar el Person ID:".$personGroup["error"];            
+            $message = $message . "Error al generar el Person ID:".$personGroupMember["error"];            
         } 
         // Upload images to azure faces service 
         $responsePhotos = CognitiveServices::getPersonGroupMemberPhoto($api_key, $person_group_id,
@@ -111,9 +111,9 @@ if ( ($_GET != array()) && ($action == "edit") ) {
                     "last_user"=>$actual_user->getId_user()) );
         for($i=0; $i<3; $i++){
             if(($responsePhotos[$i])["ok"]!= 0){
-                $message = $message . "Ingreso correcto <strong> Foto ".$i." ".$_POST["first_surname"]."</strong> en Azure. ";
+                $message = $message . "Ingreso correcto <strong> Foto ".($i+1)."</strong> en Azure. ";
             } else{
-                $message = $message . "Error al generar Foto ".$i." en Azure:".$personGroup["error"].". ";            
+                $message = $message . "Error al generar Foto ".($i+1)." en Azure:".($responsePhotos[$i])["error"].". ";            
             } 
         }
         // Train on azure faces service
@@ -122,7 +122,7 @@ if ( ($_GET != array()) && ($action == "edit") ) {
         if($responseTrain["ok"] != 0){
             $message = $message . "Train correcto del modelo en Azure. ";
         } else{
-            $message = $message . "Error al realizar el train del modelo en Azure:".$personGroup["error"].". ";            
+            $message = $message . "Error al realizar el train del modelo en Azure:".$responseTrain["error"].". ";            
         }        
         // Update Login/Session
         $actual_user->setId_person($id_person);
