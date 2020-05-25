@@ -1,6 +1,12 @@
 <?php
 require_once "security.php";
+require_once "add_person_event.php";
 require_once MODEL."EventDB.php";
+
+
+
+
+
 ?>
 <!doctype html>
 <html lang="es">
@@ -27,7 +33,7 @@ require_once MODEL."EventDB.php";
             <div class="container-fluid">
                 <div class="row ">                    
                     <div class="col text-center">
-                        <h1 class="h1 mt-5 pt-2">Lista de eventos y sesiones</span>
+                        <h1 class="h1 mt-5 pt-2">Lista de eventos y sesiones</h1>
                     </div>                  
                 </div>  
                 <div class="row">                    
@@ -61,34 +67,43 @@ require_once MODEL."EventDB.php";
                             </thead>
                             <tbody>
                                  <?php
-                                $list = (new EventDB())->getData();
+                                $list = (new EventDB())->getData($actual_user->getId_user());
                                 $n = 0;
                                 if ($list != array()) {
                                     foreach ($list as $row) {
+                                        
                                         $n = $n + 1;
+                                       
                                 ?>
                                         <tr>
                                            
 
 
                                             <th scope="row" class="text-center"><?php echo $n; ?></th>
-                                            <td class="text-center"><?php echo $row->getName(); ?></td>
-                                             <td class="text-center"><?php echo $row->getDetail(); ?></td>
-                                               <td class="text-center"><?php echo $row->getDetail(); ?></td>
+                                            <td class="text-center"><?php echo $row->getName_event(); ?></td>
+                                            <td class="text-center"><?php echo $row->getDetail_event(); ?></td>
+                                               <td class="text-center"><?php echo $row->getName_session(); ?></td>
                                          
 
                                             <td>
                                                    <a href="<?php echo VIEW_URL; ?>adm_event.php?action=edit&id=<?php echo $row->getId_event(); ?>" title="Editar" class="btn btn-primary btn-sm"><i class="far fa-edit m-1">
                                                         
                                                     </i>Editar</a>
-                                                    <a href="<?php echo VIEW_URL; ?>adm_event.php?action=delete&id=<?php echo $row->getId_event(); ?>&name=<?php echo $row->getName(); ?>" title="Eliminar" class="btn btn-danger btn-sm" onclick="return confirm('Â¿Esta seguro de borrar el usuario <?php echo $row->getName(); ?>?')"><i class="fas fa-trash-alt m-1">
+                                                
+                                                <a href="<?php echo VIEW_URL; ?>adm_event.php?action=delete&id=<?php echo $row->getId_event(); ?>&name=<?php echo $row->getName_event(); ?>" title="Eliminar" class="btn btn-danger btn-sm" onclick="return confirm('Â¿Esta seguro de borrar el usuario <?php echo $row->getName_event(); ?>?')"><i class="fas fa-trash-alt m-1">
                                             
                                                      
                                                  </i>Eliminar</a>
                                                  <a href="<?php echo VIEW_URL;?>adm_event.php?action=view" title="Ver" class="btn btn-warning btn-sm"><i class="far fa-file-alt m-1">
                                                      
                                                  </i>Solo Ver</a>
-                                                 <a href="<?php echo VIEW_URL;?>adm_sessions_list.php?action=copy" title="Sesiones" class="btn btn-info btn-sm"><i class="far fa-copy m-1"></i>Sesiones</a>
+                                                        <a href="<?php echo VIEW_URL;?>adm_sessions_list.php?action=copy"<?php echo $row->getId_event();?> title="Sesiones" class="btn btn-info btn-sm"><i class="far fa-copy m-1">
+                                                     
+                                                    </i>Sesiones</a>
+                                                 <img src=""/>
+
+                                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="onShowModal(<?php echo $row->getId_event();?>)" data-whatever="@mdo">Agregar Personas</button>
+                                                   
                                             </td>
                                         </tr>
                                 <?php
@@ -113,8 +128,13 @@ require_once MODEL."EventDB.php";
         <?php require_once 'adm_footer.php';?>
         
         <!-- JavaScript -->
+           <!-- Begin page footer -->
+         <!-- JavaScript -->
         <script src="<?php echo VIEW_JS_URL; ?>jquery-3.4.1.min.js"></script>
+        <script src="<?php echo VIEW_JS_URL; ?>bs-custom-file-input.min.js"></script>
         <script src="<?php echo VIEW_JS_URL; ?>bootstrap.min.js"></script>
+        <script src="<?php echo VIEW_JS_URL; ?>multiselect/multiselect.js"></script>
+        <script src="<?php echo VIEW_JS_URL; ?>multiselect/multiselect.min.js"></script>
         <script>        
             function copyToClipboard(elemento) {
                 var $temp = $("<input>")

@@ -1,23 +1,39 @@
 <?php
 require_once 'Event.php';
 require_once  'ExponenteProxy.php';
+require_once 'EventSessionProxy.php';
 require_once 'lib/database/DB.php';
 
 
 class EventDB extends DB{
 
-       public function getData( $like="" ){
-        $data=array();
-        try{
-            $sql = "SELECT event.id_event, event.name, event.detail, event.id_company, event.last_update, event.last_user, event.was_deleted
-                       FROM event 
-                        where   event.was_deleted = 0";
-            $result = $this->executeSelect($sql, array("search" => "%".strtoupper($like)."%") );            
-            foreach($result as $row){
-                $data[] = new Event($row);
+       public function getData($like) {
+        $data = array();
+        
+        try {
+            $sql = "SELECT\n" .
+                    "`event`.id_event,\n" .
+                    "`event`.`name` as name_event,\n" .
+                    "CONCAT(`session`.`name`,' ',`session`.when_datetime) as `name_session`,\n" .
+                    "`event`.detail as detail_event\n" .
+                    "FROM\n" .
+                    "`session`\n" .
+                    "RIGHT OUTER JOIN `event` ON `session`.id_event = `event`.id_event\n" .
+                    "INNER JOIN user ON `user`.id_user = `event`.last_user\n" .
+                    "and `event`.id_company = `user`.id_company\n" .
+                    "where `event`.was_deleted = 0 \n" .
+                    "and `user`.id_user= :last_user";
+           $result = $this->executeSelect($sql, array("last_user" =>strtoupper($like)));
+           //$result = $this->executeSelect($sql);
+            $dataE = 0;
+            foreach ($result as $row) {
+                $data[] = new EventSessionProxy($row);
+                $dataE = $dataE+1;
+              
+                
             }
-        }
-        catch (PDOException $e) {
+            echo $dataE;
+        } catch (PDOException $e) {
             die("Error: ".$e->getMessage());
         } 
         return $data;
@@ -25,11 +41,22 @@ class EventDB extends DB{
     
     public function searchData( $param ){        
         try{
-            $sql = "SELECT event.id_event, event.name, event.detail, event.id_company, event.last_update, event.last_user, event.was_deleted
-                       FROM event 
-                        where   event.was_deleted = 0";
+            $sql = "SELECT\n" .
+                    "`event`.id_event,\n" .
+                    "`event`.`name` as name_event,\n" .
+                    "CONCAT(`session`.`name`,' ',`session`.when_datetime) as `name_session`,\n" .
+                    "`event`.detail as detail_event\n" .
+                    "FROM\n" .
+                    "`session`\n" .
+                    "RIGHT OUTER JOIN `event` ON `session`.id_event = `event`.id_event\n" .
+                    "INNER JOIN user ON `user`.id_user = `event`.last_user\n" .
+                    "and `event`.id_company = `user`.id_company\n" .
+                    "where `event`.was_deleted = 0 \n" .
+                    "and `user`.id_user= :id";
+            
             $result = $this->executeSelect($sql, $param );
-            return $result==array() ? $result : (new Event($result[0]));
+             //$result = $this->executeSelect($sql);
+            return $result==array() ? $result : (new EventSessionProxy($result[0]));
         }
         catch (PDOException $e) {
             die("Error: ".$e->getMessage());
@@ -65,143 +92,7 @@ class EventDB extends DB{
         return $filasAfectadas;
     }
 
-    public function listarExponentes() {
-        $data = array();
-        try {
-            $sql = "SELECT\n" .
-                    "person.first_surname,\n" .
-                    "person.second_surname,\n" .
-                    "role.id_role,\n" .
-                    "role_company.id_company,\n" .
-                    "`user`.id_user,\n" .
-                    "person.id_person\n" .
-                    "FROM\n" .
-                    "role\n" .
-                    "INNER JOIN role_company ON role_company.id_role = role.id_role\n" .
-                    "INNER JOIN `user` ON role_company.id_user = `user`.id_user\n" .
-                    "INNER JOIN person ON person.id_user = `user`.id_user\n" .
-                    "WHERE\n" .
-                    "role.`name` = 'Exponente'";
-
-            $result = $this->executeSelect($sql);
-            foreach ($result as $row) {
-                $data[] = new ExponenteProxy($row);
-            }
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
-        }
-
-        return $data;
-    }
-    
-    
-    public function listarAsistente() {
-        $data = array();
-        try {
-            $sql = "SELECT\n" .
-                    "person.first_surname,\n" .
-                    "person.second_surname,\n" .
-                    "role.id_role,\n" .
-                    "role_company.id_company,\n" .
-                    "`user`.id_user,\n" .
-                    "person.id_person\n" .
-                    "FROM\n" .
-                    "role\n" .
-                    "INNER JOIN role_company ON role_company.id_role = role.id_role\n" .
-                    "INNER JOIN `user` ON role_company.id_user = `user`.id_user\n" .
-                    "INNER JOIN person ON person.id_user = `user`.id_user\n" .
-                    "WHERE\n" .
-                    "role.`name` = 'Asistente'";
-
-            $result = $this->executeSelect($sql);
-            foreach ($result as $row) {
-                $data[] = new ExponenteProxy($row);
-            }
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
-        }
-
-        return $data;
-    }
-    
-    public function listarControlador() {
-        $data = array();
-        try {
-            $sql = "SELECT\n" .
-                    "person.first_surname,\n" .
-                    "person.second_surname,\n" .
-                    "role.id_role,\n" .
-                    "role_company.id_company,\n" .
-                    "`user`.id_user,\n" .
-                    "person.id_person\n" .
-                    "FROM\n" .
-                    "role\n" .
-                    "INNER JOIN role_company ON role_company.id_role = role.id_role\n" .
-                    "INNER JOIN `user` ON role_company.id_user = `user`.id_user\n" .
-                    "INNER JOIN person ON person.id_user = `user`.id_user\n" .
-                    "WHERE\n" .
-                    "role.`name` = 'Controlador'";
-
-            $result = $this->executeSelect($sql);
-            foreach ($result as $row) {
-                $data[] = new ExponenteProxy($row);
-            }
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
-        }
-
-        return $data;
-    }
-    
-    public function findExponenteById($id_person) {
-        try {
-            $sql = "SELECT\n" .
-                    "person.first_surname,\n" .
-                    "person.second_surname,\n" .
-                    "role.id_role,\n" .
-                    "role_company.id_company,\n" .
-                    "`user`.id_user,\n" .
-                    "person.id_person\n" .
-                    "FROM\n" .
-                    "role\n" .
-                    "INNER JOIN role_company ON role_company.id_role = role.id_role\n" .
-                    "INNER JOIN `user` ON role_company.id_user = `user`.id_user\n" .
-                    "INNER JOIN person ON person.id_user = `user`.id_user\n" .
-                    "WHERE\n" .
-                    "role.`name` = 'Exponente'\n" .
-                    "and person.id_person = 3";
-            
-           $result = $this->executeSelect($sql);   
-            return $result == array() ? $result : (new ExponenteProxy($result[0]));
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
-        }
-    }
-
-    public function getEventEnrolled($id_event, $listExponente, $actualUser) {
-        
-        $array_enrolled= array();
-        $eventEnrolled = new Event_enrolled("");
-        foreach ($listExponente as $exponente) {
-            $exponenteProxy= $this->findExponenteById($exponente);   
-            $eventEnrolled->setId_event($id_event);
-          
-            $eventEnrolled->setId_company($exponenteProxy->getId_company());
-             
-            $eventEnrolled->setId_user($exponenteProxy->getId_user());
-          
-            $eventEnrolled->setId_role($exponenteProxy->getId_role());
-           
-            $eventEnrolled->setId_user($actualUser);
-           
-            $eventEnrolled->setWas_deleted(0);
-            $array_enrolled[]=$eventEnrolled;
-
-            
-        }
-        return $array_enrolled;
-    }
-
+   
 }
 
 
