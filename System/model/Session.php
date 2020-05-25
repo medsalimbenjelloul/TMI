@@ -12,7 +12,12 @@ class Session {
     protected $last_user; 
     protected $was_deleted;
     
-    
+    protected $event_name;
+    protected $event_detail;
+    protected $id_image;
+    protected $id_take_group_photo;
+
+    // Construct
     function __construct($row) {
         $this->id_session = isset($row["id_session"]) ?  $row["id_session"] : "";
         $this->name = isset($row["name"]) ?  $row["name"] : "";
@@ -23,6 +28,63 @@ class Session {
         $this->last_update =isset($row["last_update"]) ?  $row["last_update"] : "";
         $this->last_user = isset($row["last_user"]) ?  $row["last_user"] : "";
         $this->was_deleted = isset($row["was_deleted"]) ?  $row["was_deleted"] : "";
+        $this->event_name = isset($row["event_name"]) ?  $row["event_name"] : "";
+        $this->event_detail = isset($row["event_detail"]) ?  $row["event_detail"] : "";
+        $this->id_image = isset($row["id_image"]) ?  $row["id_image"] : "";
+        $this->id_take_group_photo = isset($row["id_take_group_photo"]) ?  $row["id_take_group_photo"] : "";
+    }
+    
+    // Methods
+    function getId_session() {
+        return $this->id_session;
+    }
+
+    function getName() {
+        return $this->name;
+    }
+
+    function getDetail() {
+        return $this->detail;
+    }
+
+    function getWhen_datetime() {
+        return $this->when_datetime;
+    }
+
+    function getId_event() {
+        return $this->id_event;
+    }
+
+    function getId_company() {
+        return $this->id_company;
+    }
+
+    function getLast_update() {
+        return $this->last_update;
+    }
+
+    function getLast_user() {
+        return $this->last_user;
+    }
+
+    function getWas_deleted() {
+        return $this->was_deleted;
+    }
+
+    function getEvent_name() {
+        return $this->event_name;
+    }
+
+    function getEvent_detail() {
+        return $this->event_detail;
+    }
+
+    function getId_image() {
+        return $this->id_image;
+    }
+
+    function getId_take_group_photo() {
+        return $this->id_take_group_photo;
     }
 
     function setId_session($id_session) {
@@ -61,40 +123,21 @@ class Session {
         $this->was_deleted = $was_deleted;
     }
 
-    function getId_session() {
-        return $this->id_session;
+    function setEvent_name($event_name) {
+        $this->event_name = $event_name;
     }
 
-    function getName() {
-        return $this->name;
+    function setEvent_detail($event_detail) {
+        $this->event_detail = $event_detail;
     }
 
-    function getDetail() {
-        return $this->detail;
+    function setId_image($id_image) {
+        $this->id_image = $id_image;
     }
 
-    function getWhen_datetime() {
-        return $this->when_datetime;
+    function setId_take_group_photo($id_take_group_photo) {
+        $this->id_take_group_photo = $id_take_group_photo;
     }
 
-    function getId_event() {
-        return $this->id_event;
-    }
-
-    function getId_company() {
-        return $this->id_company;
-    }
-
-    function getLast_update() {
-        return $this->last_update;
-    }
-
-    function getLast_user() {
-        return $this->last_user;
-    }
-
-    function getWas_deleted() {
-        return $this->was_deleted;
-    }
 }
 ?>

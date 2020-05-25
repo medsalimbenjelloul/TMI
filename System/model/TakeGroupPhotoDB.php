@@ -28,8 +28,8 @@ class TakeGroupPhotoDB extends DB{
     public function insertData($param){
         $sql = "INSERT INTO take_group_photo(observations, faceids_emotions, faceids_personids_confidences, 
                     id_image, id_session, id_company, last_update, last_user, was_deleted)
-                VALUES(observations, faceids_emotions, faceids_personids_confidences, 
-                    id_image, id_session, id_company, current_timestamp(), :last_user, 0)";
+                VALUES(:observations, :faceids_emotions, :faceids_personids_confidences, 
+                    :id_image, :id_session, :id_company, current_timestamp(), :last_user, 0)";
         $filasAfectadas = $this->executeDML($sql, $param, 1);
         
         return $filasAfectadas;
@@ -45,6 +45,20 @@ class TakeGroupPhotoDB extends DB{
         return $filasAfectadas;
     }
     
+    public function updateDataFaceIds($param){
+        $sql = "UPDATE  take_group_photo
+                SET     faceids_emotions = :faceids_emotions, last_update=current_timestamp(), last_user=:last_user, was_deleted=0
+                WHERE   id_take_group_photo = :id_take_group_photo";
+        $filasAfectadas = $this->executeDML($sql, $param);
+        return $filasAfectadas;
+    }     
     
+    public function updateDataPersonIds($param){
+        $sql = "UPDATE  take_group_photo
+                SET     faceids_personids_confidences = :faceids_personids_confidences, last_update=current_timestamp(), last_user=:last_user, was_deleted=0
+                WHERE   id_take_group_photo = :id_take_group_photo";
+        $filasAfectadas = $this->executeDML($sql, $param);
+        return $filasAfectadas;
+    }     
 }
 ?>

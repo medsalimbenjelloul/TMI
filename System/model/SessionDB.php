@@ -71,15 +71,22 @@ class SessionDB extends DB{
         return $filasAfectadas;
     }  
     
-    public function getDataEventSession( $param = array() ){
+    public function getDataByUser( $param = array() ){
         $data=array();
         try{
-             $sql = "select s.id_session, s.name, s.detail, s.when_datetime, s.id_company, s.last_update, 
-                    s.last_user, s.was_deleted, e.id_event, s.id_event from session s 
-                    INNER JOIN event e 
-                    on e.id_event = s.id_event 
-                    where s.was_deleted = 0";
-            $result = $this->executeSelect($sql, array("search" => "%".strtoupper($like)."%") );            
+             $sql = "SELECT 	s.id_session, s.name, s.detail, s.when_datetime, s.id_event, s.id_company,
+				s.last_update, s.last_user, s.was_deleted, e.name as event_name, e.detail as event_detail, tgp.id_image, tgp.id_take_group_photo 
+                    FROM 	session s 
+                    		inner join event e on e.id_event = s.id_event 
+                    		inner join event_enrolled ee on e.id_event = ee.id_event and e.id_company = ee.id_company 
+                    		left join take_group_photo tgp on s.id_session = tgp.id_session and tgp.was_deleted = 0 
+                    WHERE 	s.was_deleted = 0
+                    		and e.was_deleted = 0
+                    		and ee.was_deleted = 0
+                    		and ee.id_role = :id_role 
+                    		and ee.id_user = :id_user 
+                    		and s.id_company = :id_company ";
+            $result = $this->executeSelect($sql, $param );            
             foreach($result as $row){
                 $data[] = new Session($row);
             }
@@ -88,6 +95,6 @@ class SessionDB extends DB{
             die("Error: ".$e->getMessage());
         } 
         return $data;
-    }    
+    }       
 }
 ?>

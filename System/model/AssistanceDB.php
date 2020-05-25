@@ -17,8 +17,13 @@ class AssistanceDB extends DB{
                                 i2.name as image_name2, i2.path as image_path2,
                                 i3.name as image_name3, i3.path as image_path3,
                                 et1.name as emotion_name1, et2.name as emotion_name2, et3.name as emotion_name3,
-                                as1.name as status1, as2.name as status2, as3.name as status3, asf.name as final_status
-                    FROM 	assistance a
+                                as1.name as status1, as2.name as status2, as3.name as status3, asf.name as final_status,
+                                p.photo_1, p.names, p.first_surname, p.second_surname, p.email, p.phone, r.name as role_name
+                FROM 		person p
+                                inner join user u on p.id_user = u.id_user and u.was_deleted = 0
+                                inner join role_company rc on u.id_user = rc.id_user and rc.was_deleted = 0
+                                inner join `role` r on rc.id_role = r.id_role and r.was_deleted = 0
+                                left join assistance a on p.id_user = a.id_user and a.was_deleted = 0 and a.id_event = :id_event and a.id_company = :id_company  and a.id_session = :id_session 
                                 left join take_group_photo tgp1 on a.group_photo_1 = tgp1.id_take_group_photo and tgp1.was_deleted = 0
                                 left join take_group_photo tgp2 on a.group_photo_2 = tgp2.id_take_group_photo and tgp2.was_deleted = 0
                                 left join take_group_photo tgp3 on a.group_photo_3 = tgp3.id_take_group_photo and tgp3.was_deleted = 0
@@ -32,13 +37,12 @@ class AssistanceDB extends DB{
                                 left join emotion_type et2 on a.emotion_2 = et2.id_emotion_type and et2.was_deleted = 0
                                 left join emotion_type et3 on a.emotion_3 = et3.id_emotion_type and et3.was_deleted = 0
                                 left join assistance_status asf on a.final_assistance_status = asf.id_assistance_status and asf.was_deleted = 0
-                    WHERE	a.was_deleted = 0 
-                                and a.id_event = :id_event
-                                and a.id_company = :id_company
-                                and a.id_session = :id_session                                
+                    WHERE	p.was_deleted = 0 
+                                and p.id_company = :id_company
+                                and r.is_only_system = 0                               
                                 ";
             if($by==2){
-                $sql = $sql . "and a.id_user = :id_user";
+                $sql = $sql . "and u.id_user = :id_user";
             }
             
             $result = $this->executeSelect($sql, $param );            

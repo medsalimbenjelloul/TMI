@@ -49,6 +49,23 @@ class UserDB extends DB{
         }        
     } 
     
+    public function searchDataByPersonID( $param ){        
+        try{
+            $sql = "select  u.id_user
+                    from    user u
+                            inner join person p on u.id_user = p.id_user 
+                    where   u.was_deleted = 0
+                            and p.was_deleted = 0
+                            and u.id_company = :id_company 
+                            and p.person_id = :person_id";
+            $result = $this->executeSelect($sql, $param );
+            return $result==array() ? $result : (new User($result[0]));
+        }
+        catch (PDOException $e) {
+            die("Error: ".$e->getMessage());
+        }        
+    } 
+    
     public function searchDataAdministrator( $param ){        
         try{
             $sql = "SELECT 	u.id_user, u.username, u.password, u.active, u.id_company, u.last_update, 

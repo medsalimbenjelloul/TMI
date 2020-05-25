@@ -91,6 +91,10 @@ INSERT INTO emotion_type
 (name, source_name, last_update, last_user, was_deleted)
 VALUES('Sorpresa', 'surprise', CURRENT_TIMESTAMP(), 1, 0);
 
+INSERT INTO emotion_type
+(name, source_name, last_update, last_user, was_deleted)
+VALUES('Enfado', 'anger', CURRENT_TIMESTAMP(), 1, 0);
+
 -- faces service
 
 INSERT INTO service_type(name, source_name, last_update, last_user, was_deleted)

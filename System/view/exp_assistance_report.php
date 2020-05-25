@@ -1,5 +1,6 @@
 <?php
 require_once "security.php";
+require_once MODEL . "AssistanceDB.php";
 ?>
 <!doctype html>
 <html lang="es">
@@ -28,7 +29,18 @@ require_once "security.php";
                     <div class="col text-center">
                         <h1 class="h1 mt-5 pt-2">Lista de asistencia</span>
                     </div>                  
-                </div>                                
+                </div>   
+                <div class="row">                    
+                    <div class="col text-center">
+                        <?php if (isset($_GET["message"])) { ?>
+                            <div class="alert alert-info" role="alert">
+                                <?php echo $_GET["message"]; ?>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>                  
+                </div>                
                 <div class="row">
                     <div class="col">
                         <div class="table-responsive">
@@ -48,24 +60,35 @@ require_once "security.php";
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row" style="width:50px" class="text-center">1</th>
-                                    <td>Foto</td>
-                                    <td>Luis Fernando</td>
-                                    <td>Almendras</td>
-                                    <td>Aruzamen</td>
-                                    <td>vicholuis@gmail.com</td>
-                                    <td>658336737</td>   
-                                    <td>Asistió</td>
-                                    <td>
-                                        Foto 1 - Alegre<br>
-                                        Foto 2 - Triste<br>
-                                        Foto 3 - Pensativo<br>
-                                    </td>
-                                    <td style="width:175px">
-                                        <a href="<?php echo VIEW_URL;?>exp_change_assistance.php?action=edit" title="Modificar asistencia" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></i> Modificar Asistencia</a>
-                                    </td>                                    
-                                </tr>
+                                <?php
+                                $list = (new AssistanceDB())->getDataBy(array("id_company" => $actual_user->getId_company(), "id_event" => $_GET["id_event"], "id_session" => $_GET["id"]),  1);
+                                $n = 0;
+                                if ($list != array()) {
+                                    foreach ($list as $row) {
+                                        $n = $n + 1;
+                                        ?>
+                                        <tr>
+                                            <th scope="row" class="text-center"><?php echo $n; ?></th>
+                                            <td class="text-center"><?php if($row->getPhoto_1()!=null){ echo "<img src='". VIEW_PHOTOS_URL . $row->getPhoto_1()."' class='img-thumbnail' width='80' height='80'>"; }?></td>
+                                            <td class="text-center"><?php echo $row->getNames(); ?></td>
+                                            <td class="text-center"><?php echo $row->getNames(); ?></td>
+                                            <td class="text-center"><?php echo $row->getNames(); ?></td>
+                                            <td class="text-center"><?php echo $row->getWhen_datetime(); ?></td>
+                                            <td class="text-center"><?php echo $row->getDetail(); ?></td>                                            
+                                            <td style="width:175px">
+                                                <a href="<?php echo VIEW_URL; ?>exp_change_assistance.php?action=edit" title="Modificar asistencia" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></i> Modificar Asistencia</a>
+                                            </td>                                    
+                                        </tr>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>    
+                                    <tr>
+                                        <th scope="row" class="text-center" colspan="7">No existen datos.</th>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>                                
                             </tbody>
                         </table>
                         </div>

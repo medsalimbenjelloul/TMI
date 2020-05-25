@@ -27,7 +27,7 @@ require_once MODEL."UserDB.php";
             <div class="container-fluid">
                 <div class="row ">                    
                     <div class="col text-center">
-                        <h1 class="h1 mt-5 pt-2">Lista de usuarios</span>
+                        <h1 class="h1 mt-5 pt-2">Lista de usuarios</h1>
                     </div>                  
                 </div>
                 <div class="row">                    

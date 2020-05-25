@@ -33,9 +33,25 @@ class Assistance{
     protected $status2;
     protected $status3;
     protected $final_status;
+    
+    protected $photo_1;
+    protected $names;
+    protected $first_surname;
+    protected $second_surname;
+    protected $email;
+    protected $phone;
+    protected $role_name;
    
     // Construct
     public function __construct($row) {    
+        $this->photo_1 = isset($row["photo_1"]) ? $row["photo_1"] : "";
+        $this->names = isset($row["names"]) ? $row["names"] : "";
+        $this->first_surname = isset($row["first_surname"]) ? $row["first_surname"] : "";
+        $this->second_surname = isset($row["second_surname"]) ? $row["second_surname"] : "";
+        $this->email = isset($row["email"]) ? $row["email"] : "";
+        $this->phone = isset($row["phone"]) ? $row["phone"] : "";
+        $this->role_name = isset($row["role_name"]) ? $row["role_name"] : "";
+        
         $this->id_event = isset($row["id_event"]) ? $row["id_event"] : "";
         $this->id_session = isset($row["id_session"]) ? $row["id_session"] : "";
         $this->id_company = isset($row["id_company"]) ? $row["id_company"] : "";
@@ -199,6 +215,34 @@ class Assistance{
         return $this->final_status;
     }
 
+    function getPhoto_1() {
+        return $this->photo_1;
+    }
+
+    function getNames() {
+        return $this->names;
+    }
+
+    function getFirst_surname() {
+        return $this->first_surname;
+    }
+
+    function getSecond_surname() {
+        return $this->second_surname;
+    }
+
+    function getEmail() {
+        return $this->email;
+    }
+
+    function getPhone() {
+        return $this->phone;
+    }
+
+    function getRole_name() {
+        return $this->role_name;
+    }
+
     function setId_event($id_event) {
         $this->id_event = $id_event;
     }
@@ -325,6 +369,34 @@ class Assistance{
 
     function setFinal_status($final_status) {
         $this->final_status = $final_status;
+    }
+
+    function setPhoto_1($photo_1) {
+        $this->photo_1 = $photo_1;
+    }
+
+    function setNames($names) {
+        $this->names = $names;
+    }
+
+    function setFirst_surname($first_surname) {
+        $this->first_surname = $first_surname;
+    }
+
+    function setSecond_surname($second_surname) {
+        $this->second_surname = $second_surname;
+    }
+
+    function setEmail($email) {
+        $this->email = $email;
+    }
+
+    function setPhone($phone) {
+        $this->phone = $phone;
+    }
+
+    function setRole_name($role_name) {
+        $this->role_name = $role_name;
     }
 
 }

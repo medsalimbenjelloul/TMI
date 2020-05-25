@@ -48,10 +48,10 @@ class CognitiveServices {
                 $d["id_take_group_photo"] = null;
                 $d["id_company"] = $data["id_company"];
                 $d["last_user"]= $data["last_user"];
-        }else if($service_type == 5){//detect
+        }else if($service_type == 5 || $service_type == 6){//detect and identify
                 $d["json_response"] = $data["json_response"];
                 $d["id_service_type"] = $service_type;
-                $d["id_person"] = $data["id_person"];
+                $d["id_person"] = null;
                 $d["id_image"] = $data["id_image"];
                 $d["id_take_group_photo"] = $data["id_take_group_photo"];
                 $d["id_company"] = $data["id_company"];
@@ -268,7 +268,8 @@ class CognitiveServices {
     
     // 5. Faces detection
     static public function getDetection($ocpApimSubscriptionKey, $data) {   
-        $imageUrl = VIEW_IMG_URL . data["id_image"];
+        $imageUrl = VIEW_PHOTOS_URL . $data["id_image"];
+
         //Api Face Detect
         $request = new Http_Request2(self::$uriBase . '/detect');
         $url = $request->getUrl();
@@ -298,34 +299,56 @@ class CognitiveServices {
             $response = $request->send();
             $json = json_decode($response->getBody());
             $elements = array();
-            foreach($json as $elem){
-                // Detect emotion
-                $emotion = ($elem->faceAttributes)->emotion;
-                $faceId_emotion = null;
-                if($emotion->anger == "1"){
-                    $faceId_emotion = "anger";
-                }else if($emotion->contempt == "1"){
-                    $faceId_emotion = "contempt";
-                }else if($emotion->disgust == "1"){
-                    $faceId_emotion = "disgust";
-                }else if($emotion->fear == "1"){
-                    $faceId_emotion = "fear";
-                }else if($emotion->happiness == "1"){
-                    $faceId_emotion = "happiness";
-                }else if($emotion->neutral == "1"){
-                    $faceId_emotion = "neutral";
-                }else if($emotion->sadness == "1"){
-                    $faceId_emotion = "sadness";
-                }else if($emotion->surprise == "1"){
-                    $faceId_emotion = "surprise";
+            if(!isset($json->error)){ 
+                foreach($json as $elem){
+                    // Detect emotion
+                    $emotion = ($elem->faceAttributes)->emotion;
+                    $faceId_emotion_name = "";
+                    $faceId_emotion_value = 0;
+                    if(floatval($emotion->anger) > floatval($faceId_emotion_value)){
+                        $faceId_emotion_name = "anger";
+                        $faceId_emotion_value = $emotion->anger;
+                    }
+                    if(floatval($emotion->contempt) > floatval($faceId_emotion_value)){
+                        $faceId_emotion_name = "contempt";
+                        $faceId_emotion_value = $emotion->contempt;
+                    }
+                    if(floatval($emotion->disgust) > floatval($faceId_emotion_value)){
+                        $faceId_emotion_name = "disgust";
+                        $faceId_emotion_value = $emotion->disgust;                        
+                    }
+                    if(floatval($emotion->fear) > floatval($faceId_emotion_value)){
+                        $faceId_emotion_name = "fear";
+                        $faceId_emotion_value = $emotion->fear;                        
+                    }
+                    if(floatval($emotion->happiness) > floatval($faceId_emotion_value)){
+                        $faceId_emotion_name = "happiness";
+                        $faceId_emotion_value = $emotion->happiness;                        
+                    }
+                    if(floatval($emotion->neutral) > floatval($faceId_emotion_value)){
+                        $faceId_emotion_name = "neutral";
+                        $faceId_emotion_value = $emotion->neutral;                        
+                    }
+                    if(floatval($emotion->sadness) > floatval($faceId_emotion_value)){
+                        $faceId_emotion_name = "sadness";
+                        $faceId_emotion_value = $emotion->sadness;                        
+                    }
+                    if(floatval($emotion->surprise) > floatval($faceId_emotion_value)){
+                        $faceId_emotion_name = "surprise";
+                        $faceId_emotion_value = $emotion->surprise;                        
+                    }
+                    // Final response
+                    $elements[] = array("faceid"=>$elem->faceId,"emotion"=>$faceId_emotion_name,"value"=>$faceId_emotion_value);
                 }
-                // Final response
-                $elements[] = array("faceid"=>$elem->faceId,"emotion"=>$faceId_emotion);
-            }
-            //echo "<pre class='border rounded'>" . json_encode($array, JSON_PRETTY_PRINT) . "</pre>";
-            $data["json_response"] = json_encode($json);
-            self::insertResponse($data, 5);
-            return array("facesids"=>$elements,"error"=>"");
+                //echo "<pre class='border rounded'>" . json_encode($array, JSON_PRETTY_PRINT) . "</pre>";
+                $data["json_response"] = json_encode($json);
+                self::insertResponse($data, 5);
+                return array("facesids"=>$elements,"error"=>"");                   
+               }else{
+                    $data["json_response"] = json_encode($json);
+                    self::insertResponse($data, 5);
+                    return array("facesids"=>0,"error"=>"Revisar log para ver la causa del error.");                            
+               }
         }
         catch (HttpException $ex)
         {
@@ -368,16 +391,22 @@ class CognitiveServices {
             $json = json_decode($response->getBody());    
             //echo "<pre class='border rounded'>" . json_encode($array, JSON_PRETTY_PRINT) . "</pre><br/>";
             $report = array();
-            foreach($json as $elem){
-                $faceid = $elem->faceId;
-                $objs = $elem->candidates;
-                foreach($objs as $obj){
-                    $report[] = array("faceid"=>$faceid,"personid"=>$obj->personId, "confidence"=>$obj->confidence);
+            if(!isset($json->error)){ 
+                foreach($json as $elem){
+                    $faceid = $elem->faceId;
+                    $objs = $elem->candidates;
+                    foreach($objs as $obj){
+                        $report[] = array("faceid"=>$faceid,"personid"=>$obj->personId, "confidence"=>$obj->confidence);
+                    }
                 }
+                $data["json_response"] = json_encode($json);
+                self::insertResponse($data, 6);
+                return array("personids"=>$report,"error"=>"");
+            } else{
+                $data["json_response"] = json_encode($json);
+                self::insertResponse($data, 6);
+                return array("personids"=>0,"error"=>"Revisar log para ver la causa del error. ");
             }
-            $data["json_response"] = json_encode($json);
-            self::insertResponse($data, 6);
-            return array("personids"=>$report,"error"=>"");
         }
         catch (HttpException $ex)
         {
